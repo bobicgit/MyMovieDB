@@ -13,7 +13,8 @@ function filling() {
 			$('#selection').empty();
 			$('#selection').append('<option value = "">--Select Genre--</option>');
 			$.each(data,function(i, item) {
-				$('#selection').append('<option value ="' + data[i].idgenres + '" >' + data[i].genre + '</option>');
+				$('#selection').append('<option value ="' + data[i].idgenres + '" >' + data[i].genre +
+				 '</option>');
 			});
 		},
 		error: function(jqXHR, textStatus, errorThrown) {
@@ -29,7 +30,9 @@ function filling() {
 		success: function(data) {
 			console.log(data);
 			$.each(data,function(i, item) {
-				$('#actors').append('<input type = "checkbox" id="' + 'cb' + data[i].idactors + '" value = "'+data[i].idactors+'" name = "check_list[]">' + " " + data[i].name + " " + data[i].surname + '<br>');
+				$('#actors').append('<input type = "checkbox" id="' + 'cb' + data[i].idactors + 
+				'" value = "'+data[i].idactors+'" name = "check_list[]">' + " " + data[i].name + " "
+				 + data[i].surname + '<br>');
 			});
 		},
 		error: function(jqXHR, textStatus, errorThrown) {
@@ -80,11 +83,30 @@ $(function myval(){
 	});
 });
 
+function show_all_movies(){
+	$.ajax({
+		type: 'POST',
+		url: 'show_all_movies.php',
+		//contentType: 'text/html; charset=utf-8',
+		dataType:'json',
+		success: function(data) {
+			console.log(data);
+			$.each(data,function(i, item) {
+				$('#all_movies').append('<a href = "index.php"> ' + data[i].title + "</a> <br>");
+			});
+		},
+		error: function(jqXHR, textStatus, errorThrown) {
+ 		 	console.log(textStatus, errorThrown);
+		}	
+	});
+
+};
+
 
 $(document).ready(function(){
 
 	filling();
-	
+	show_all_movies();
 
 
 	$('#jRate').jRate({

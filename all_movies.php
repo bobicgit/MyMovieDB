@@ -55,69 +55,9 @@
 		</div>
 		<!-- Main -->
 		<div id="content">
-			<h2>Add your favorite movies to my database!</h2>
-			<form class="form-horizontal" id="add_movie" action="/">
-  				<div class="form-group">
-    				<label for="title" class="col-sm-4 control-label">Title</label>
-   						<div class="col-sm-4">
-      						<input type="text" class="form-control" name="title" placeholder="Title">
-    					</div>
-  				</div>
-
-  				<div class="form-group">
-    				<label for="despription" class="col-sm-4 control-label">Description</label>
-    					<div  class="col-sm-4">
-      						<textarea id = "summernote_field" class="form-control" rows="4"></textarea>
-                  <input type="hidden" class="form-control" name="summernote_holder" id="summernote_plain" >
-    					</div>
-  				</div>
-
-  				<div class="form-group">
-    				<label for="year" class="col-sm-4 control-label">Year</label>
-    					<div class="col-sm-4">
-      						<input type="text" class="form-control" name="year" placeholder="Year">
-    					</div>
-  				</div>
-
-				<!-- rating SELECT BOX podpinasz plugin pod siatke bootstrapa z class col-sm-->
-
-  				 <div id="forselect" class="form-group" >
-  					<label for="selection" class="col-sm-4 control-label">Genre</label>
-  						<div class=" col-sm-3">
-                <select id="selection" name="selection_to_send">
-      
-                </select>
-  						</div>
-  				</div>
-
-  				<!-- rating RATING PLUGIN podpinasz plugin pod siatke bootstrapa z class col-sm-->
-  				<div  class="form-group ">
-  					<label for="jRate" class="col-sm-4 control-label">Rating</label>
-  					<div class=" col-sm-1" id="jRate">
-  						<!-- tutaj siedza wszystkie gwiazki z jRate plugin -->
-  					</div>
-  				</div>
-          <div class="form-group">
-          <input type="hidden" class="form-control" name="rate" id="actual_rate">
-          <div id="container_for_error"></div></div>
-
-          <!-- Multi wybór aktorów z bazy danych -->
-  				 <div id="formultiselect" class="form-group" >
-  					<label for="selection" class="col-sm-4 control-label">Actors</label>
-  						<div class=" col-sm-3" id="actors">
-                
-                <!-- tutaj siedzi wynik z jRate plugin, ktory pobieram potwirdzajac formularz -->
-                
-  						</div>
-  				</div>
-
-
-  				<div class="form-group">
-    				<div class="col-sm-offset-5 col-sm-2">
-      					<button type="submit" class="btn btn-default" id="subbut">Add a movie!</button>
-    				</div>
- 				</div>
-			</form>
+			<h2>List of movies from database: </h2>
+      <div id="all_movies">
+      </div>
 		</div>
 
 		<div id="socials">
