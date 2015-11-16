@@ -1,0 +1,200 @@
+ /*{
+  border: dashed white 1px;
+} */
+
+html, body{
+	margin: 0;
+	padding:0;
+	color:lightgrey;
+	background-color: #333;
+	
+	font-family: 'Lato', sans-serif;
+	font-size:20px;
+}
+
+body{padding-top:50px;}
+
+#container{
+	width: 100%;
+}
+
+#header{
+	margin-top:30px;
+	width:100%;
+	padding: 40px 0;
+}
+
+#logo{
+	width:450px;
+	font-size:48px;
+	border:1px solid white;
+	margin-left: auto;
+	margin-right: auto;
+	height:138px;
+	margin-top:40px;
+}
+#logo h1{
+	font-size: 50px;
+	margin-top:40px;
+	
+}
+#logo img {
+	margin-right: 35px;
+}
+
+.navbar{
+	padding-top: 10px;
+	padding-bottom: 10px;
+	background-color: #D70A0A;
+}
+
+#nav a{
+	color: #fff;
+}
+#nav a:hover{
+	color: #ff9090;
+}
+
+
+#content {
+	margin-top: 40px;
+	margin-right: auto;
+	margin-left: auto;
+	font-size:16px;
+	width: 100%;
+}
+
+#content h2 {
+	
+	font-size:25px;
+	text-align: center;
+	margin-bottom: 40px;
+}
+
+.form-group{
+	width: 100%;
+}
+
+#jRate {
+	padding:5px;
+	width:auto;
+	margin-left: 8px;
+	/*margin-bottom: 5px;*/
+}
+
+#actual_rate{
+	width: 1%;
+	height: 2px;
+	margin-left: 445px;
+	margin-right: auto;
+	margin-top: -16px;
+}
+
+#container_for_error{
+	width:20%;
+	margin-left: 466px;
+	margin-top: -17px;
+}
+
+label.error{
+	color:#ff9090;
+
+
+}
+select {
+	width: 240px;
+	height: 30px;
+	margin-top: 8px;
+	cursor:pointer;
+}
+
+input[type="checkbox"]{
+	width:15px;
+	height: 15px;
+	cursor:pointer;
+	margin:-1px 4px 0 0;
+	background: green;
+}
+
+#actors {
+	width:40%;
+}
+
+#subbut {
+	background-color:#D70A0A;
+	color:#fff;
+	width:190px;
+	height: 50px; 
+	margin-top: 15px;
+	margin-left:auto;
+	margin-right: auto;
+	font-size: 24px;
+}
+
+#subbut:hover{
+	color:#ff9090;
+}
+#socials {
+	margin-top:40px;
+	width: 100%;
+	text-align: center;
+	background-color: #292929;
+}
+
+#socialdivs{
+	width:1000px;
+	margin-right: auto;
+	margin-left: auto;
+	height: 155px;
+}
+
+.fb{
+	width: 250px;
+	height: 155px;
+	float:left;
+}
+
+.fb:hover{
+	background-color: #4668b3;
+}
+.fw{
+	width: 250px;
+	height: 155px;
+	float:left;
+}
+
+.fw:hover{
+	background-color: #FFC404;
+}
+.imdb{
+	width: 250px;
+	height: 155px;
+	float:left;
+}
+
+.imdb:hover{
+	background-color: #f5de50;
+}
+.kmf{
+	width: 250px;
+	height: 155px;
+	float:left;
+}
+
+.kmf:hover{
+	background-color: #7F3E98;
+}
+
+a.sociallink{
+	color:white;
+	text-decoration: none;
+	display:block;
+	width: 250px;
+	height: 155px;
+
+}
+
+#footer {
+	padding:30px;
+	height:50px;
+}
