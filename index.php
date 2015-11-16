@@ -38,7 +38,7 @@
       			<ul class="nav navbar-nav" >
         			<li ><a href="#">Home</a></li>
         			<li><a href="#">Movies</a></li>
-        			<li><a href="#">Top 10</a></li>
+        			<li><a href="#">Top 1pppppp0</a></li>
         			<li><a href="#">Contact</a></li>
       			</ul>
 
