@@ -50,7 +50,7 @@ $(function myval(){
 				number: true,
 				min: 1900,
 				digits: true,
-				max: 2016
+				max: 2015
 			},
 			summernote_holder: "required",
 			rate: "required",
