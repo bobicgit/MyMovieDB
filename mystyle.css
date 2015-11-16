@@ -106,6 +106,7 @@ select {
 	height: 30px;
 	margin-top: 8px;
 	cursor:pointer;
+	color:grey;
 }
 
 input[type="checkbox"]{
