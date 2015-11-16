@@ -55,8 +55,13 @@
 		</div>
 		<!-- Main -->
 		<div id="content">
-			<h2>Contact: </h2>
-			
+			<h2>Feel free to contact me: </h2>
+			<div id="contact">
+        <p>Front End Developer</p>
+        <p>Maciej Mańko </p>
+        <p>tel. 606 689 846</p>
+        <p>e-mail: maciej.manko.90@gmail.com</p>
+      </div>
 		</div>
 
 		<div id="socials">

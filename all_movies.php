@@ -55,7 +55,7 @@
 		</div>
 		<!-- Main -->
 		<div id="content">
-			<h2>List of movies from database: </h2>
+			<h2>List of all movies from database: </h2>
       <div id="all_movies">
       </div>
 		</div>
