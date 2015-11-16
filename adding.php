@@ -11,27 +11,35 @@
     // wyswietli numer bledu
   }else{
 
-   // $data=$_POST['serialize'];
+   // mysli_real_escape_string jest ogolnodostepna funkcja, ktora chroni przed wstrzykiwaniem SQLa przez
+  //  uzytkownikow. Characters encoded are NUL (ASCII 0), \n, \r, \, ', ", and Control-Z.
    if(isset($_POST)){
-    $title = $_POST['title'];
+    $title = mysqli_real_escape_string($connection, $_POST['title']);
     $description = $_POST['summernote_holder'];
-    $year = $_POST['year'];
+    $year = mysqli_real_escape_string($connection,$_POST['year']);
     $rate = $_POST['rate'];
-    $idgenres = $_POST['selection_to_send'];
+    $id_genres = $_POST['selection_to_send'];
+
+
+    // encja - zastepczy zestaw znakow, ktory przegladarka pokaze w ten sam sposob jak znak, ktory zastepuje 
+    //encje. ENT-QUOTES mowi o tym aby zamieniac na encje cudzyslowie i apostrofy takze. UTF-8 - cahrset
+    $title = htmlentities($title, ENT_QUOTES, "UTF-8");
+    $year = htmlentities($year, ENT_QUOTES, "UTF-8");
     
 
-    echo $title."<br>".$description."<br>".$year."<br>".$rate."<br>".$idgenres."<br>";
+    echo $title."<br>".$description."<br>".$year."<br>".$rate."<br>".$id_genres."<br>";
 
     $actors = $_POST['check_list']; // tablica zaznaczonych checkboxow
     $number_of_checked_boxes = count($actors); // zlicza ile checkboxow zostalo zaznaczonych.
 
     echo "You selected ".$number_of_checked_boxes." boxes</br>";
 
-    $sql_movie = "INSERT INTO movies (idmovie, title, description, year, idgenres, rating) VALUES (Null, '$title', '$description', '$year', '$idgenres', '$rate')";
+    $sql_movie = "INSERT INTO movies (id_movie, title, description, year, id_genres, rating)
+     VALUES (Null, '$title', '$description', '$year', '$id_genres', '$rate')";
     $result = @$connection ->query($sql_movie);
-    $movieid = $connection->insert_id; // id ostatniego insertu przechowuje w zmiennej movieid
+    $movie_id = $connection->insert_id; // id ostatniego insertu przechowuje w zmiennej movieid
 
-    echo "The id of the movie you have just added is ".$movieid."</br>";
+    echo "The id of the movie you have just added is ".$movie_id."</br>";
 
     }
 
@@ -44,7 +52,8 @@
 
       for ($i=0; $i <$number_of_checked_boxes ; $i++) { 
 
-         $sql_actors="INSERT INTO proba (id,actorid, movieid) Values (NUll, '.$actors[$i].', '$movieid')";
+         $sql_actors="INSERT INTO actors_movies (id,actor_id, movie_id) 
+         Values (NUll, '.$actors[$i].', '$movie_id')";
          $result = @$connection ->query($sql_actors);
       }
 

@@ -50,7 +50,7 @@ $(function myval(){
 				number: true,
 				min: 1900,
 				digits: true,
-				max: 2015
+				max: 2016
 			},
 			summernote_holder: "required",
 			rate: "required",
@@ -103,9 +103,7 @@ $(document).ready(function(){
 
 		height: 150,// nie wykonuje sie nic z onChnange, a wczesniej robilo
 		onChange: function(contents, $editable) {
-		 cleanText = $('#summernote_field').code().replace(/<\/?[^>]+(>|$)/g, "")
-		 	                				.replace(/<\/p>/gi, "\n")
-                							.replace(/<br\/?>/gi, "\n");
+		 cleanText = $('#summernote_field').code();
     	$('#summernote_plain').val(cleanText);
     	console.log(cleanText);
   		},

@@ -1,38 +1,55 @@
-
 -- phpMyAdmin SQL Dump
--- version 2.11.4
+-- version 4.1.14
 -- http://www.phpmyadmin.net
 --
--- Host: localhost
--- Generation Time: Oct 22, 2015 at 09:50 AM
--- Server version: 5.1.57
--- PHP Version: 5.2.17
+-- Host: 127.0.0.1
+-- Generation Time: 16 Lis 2015, 13:15
+-- Server version: 5.6.17
+-- PHP Version: 5.5.12
 
-SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
 
 --
--- Database: `a7698939_movies`
+-- Database: `movies`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `Actors`
+-- Struktura tabeli dla tabeli `actors`
 --
 
-CREATE TABLE `Actors` (
+CREATE TABLE IF NOT EXISTS `actors` (
   `idactors` int(11) NOT NULL AUTO_INCREMENT,
-  `name` text COLLATE latin1_general_ci NOT NULL,
-  `surname` text COLLATE latin1_general_ci NOT NULL,
+  `name` text CHARACTER SET utf8 NOT NULL,
+  `surname` text CHARACTER SET utf8 NOT NULL,
   PRIMARY KEY (`idactors`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 COLLATE=latin1_general_ci AUTO_INCREMENT=6 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=12 ;
 
 --
--- Dumping data for table `Actors`
+-- Zrzut danych tabeli `actors`
 --
 
-INSERT INTO `Actors` VALUES(1, 'Kurt', 'Russel');
-INSERT INTO `Actors` VALUES(2, 'Al', 'Pacino');
-INSERT INTO `Actors` VALUES(3, 'Robert', 'DeNiro');
-INSERT INTO `Actors` VALUES(4, 'Nicholas', 'Cage');
-INSERT INTO `Actors` VALUES(5, 'John', 'Carpenter');
+INSERT INTO `actors` (`idactors`, `name`, `surname`) VALUES
+(1, 'Kurt', 'Russel'),
+(2, 'Al', 'Pacino'),
+(3, 'Marlon', 'Brando'),
+(4, 'Leonardo', 'DiCaprio'),
+(5, 'Jack', 'Nicholson'),
+(6, 'Tom', 'Hanks'),
+(7, 'Steve', 'Carell'),
+(8, 'Matthew ', 'McConaughey'),
+(9, 'Robert', 'DeNiro'),
+(10, 'Joaquin', 'Phoenix'),
+(11, 'Sean', 'Connery');
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
