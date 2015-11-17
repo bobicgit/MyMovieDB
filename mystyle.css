@@ -150,6 +150,16 @@ input[type="checkbox"]{
 	width:40%;
 }
 
+#specific_movie{
+	width: 50%;
+	text-align: center;
+	font-size: 18px;
+	margin-right: auto;
+	margin-left: auto;	
+	line-height: 1.5em;
+	
+}
+
 #contact {
 	width: 50%;
 	text-align: center;

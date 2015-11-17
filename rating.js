@@ -1,4 +1,6 @@
-function filling() {
+// Funkcja wypelniajaca pole select nazwami gatunkow z bazy danych oraz wykonujaca checkboxy
+// z imieniem oraz nazwiskiem aktora, rowniez z bazy danych. 
+function filling(){
 	$('#selection').empty();
 	$('#selection').append("<option value = ''>Loading ...</option>");
 
@@ -42,6 +44,7 @@ function filling() {
 
 }
 
+//Funkcja służąca do walidacji formularza
 $(function myval(){
 
 	$('#add_movie').validate({
@@ -83,30 +86,30 @@ $(function myval(){
 	});
 });
 
-function show_all_movies(){
-	$.ajax({
-		type: 'POST',
-		url: 'show_all_movies.php',
-		//contentType: 'text/html; charset=utf-8',
-		dataType:'json',
-		success: function(data) {
-			console.log(data);
-			$.each(data,function(i, item) {
-				$('#all_movies').append('<a href = "index.php"> ' + data[i].title + "</a> <br>");
-			});
-		},
-		error: function(jqXHR, textStatus, errorThrown) {
- 		 	console.log(textStatus, errorThrown);
-		}	
-	});
+// function show_all_movies(){
+// 	$.ajax({
+// 		type: 'POST',
+// 		url: 'show_all_movies.php',
+// 		//contentType: 'text/html; charset=utf-8',
+// 		dataType:'json',
+// 		success: function(data) {
+// 			console.log(data);
+// 			$.each(data,function(i, item) {
+// 				$('#all_movies').append('<a href = "index.php"> ' + data[i].title + "</a> <br>");
+// 			});
+// 		},
+// 		error: function(jqXHR, textStatus, errorThrown) {
+//  		 	console.log(textStatus, errorThrown);
+// 		}	
+// 	});
 
-};
+// };
 
 
 $(document).ready(function(){
 
 	filling();
-	show_all_movies();
+	//show_all_movies();
 
 
 	$('#jRate').jRate({
