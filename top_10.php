@@ -56,7 +56,46 @@
 		<!-- Main -->
 		<div id="content">
 			<h2>Top 10 movies from database: </h2>
+			<div id="all_movies">
 			
+<?php
+
+  require_once "conect.php";
+
+  $connection = @new mysqli($host,$db_user,$db_pass,$db_name);
+
+  if($connection ->connect_errno!=0){
+
+    echo "Error: ".$connection->connect_errno."Opis: ".$connection->connect_error;
+    // to echo wykona sie tylko wtedy gdy polaczenia nie uda sie ustanowic.
+    // wyswietli numer bledu
+  }else{
+
+    $sql = "SELECT * FROM movies ORDER BY rating *1 DESC Limit 10";
+    
+      if($result = @$connection ->query($sql)){
+
+        while($data = mysqli_fetch_array($result)){
+
+          $id_movie = $data['id_movie'];
+          $title = $data['title'];
+          $rating = $data['rating'];
+
+          echo ('<a href="movie_details.php?id=' . $id_movie . '" >' . $title .' .......... Rating: '.$rating.'</a><br>');
+          // Tworzy unikatowe linki z danym id filmu. Id bedzie przesylane do pliku movie_details 
+          //  i wyseitlane beda tam o nim informacje z bazy danych.
+          //var_dump($id_movie);
+        }
+
+      }else{
+        echo "ERROR: Could not able to execute $sql. " . mysqli_error($connection);
+      }
+    
+  }
+ $connection->close();
+
+?>  			
+			</div>		
 		</div>
 
 		<div id="socials">

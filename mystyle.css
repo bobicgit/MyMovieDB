@@ -1,6 +1,6 @@
  /*{
   border: dashed white 1px;
-} */
+}*/ 
 
 html, body{
 	margin: 0;
@@ -150,16 +150,44 @@ input[type="checkbox"]{
 	width:40%;
 }
 
+#all_movies a{
+	text-decoration: none;
+	color: lightgrey;
+	font-size: 19px;
+}
+
+#all_movies a:hover{
+	
+	color: #ff9090;
+	font-size: 19px;
+}
+
+
 #specific_movie{
-	width: 50%;
+	width: 40%;
 	text-align: center;
 	font-size: 18px;
 	margin-right: auto;
 	margin-left: auto;	
-	line-height: 1.5em;
+	line-height: 2em;
+
+}
+
+#title_generated{
+	font-size: 40px;
 	
 }
 
+#sizing_title{
+	font-size: 40px;
+	margin-top: 10px;
+	padding:5px;
+}
+
+.writecolor{
+	color: #ff9090;
+	font-size: 22px;
+}
 #contact {
 	width: 50%;
 	text-align: center;

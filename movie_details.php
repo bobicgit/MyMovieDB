@@ -72,7 +72,7 @@
   }else{
 
     $id_movie = $_GET['id']; // pobiera id z linku ktory tworzy sie w petli while w pliku all_movies
-    //var_dump($id_movie);
+// *****
     $sql = "SELECT * FROM movies WHERE id_movie=$id_movie";
     
       if($result = @$connection ->query($sql)){
@@ -88,61 +88,68 @@
 
 // ******** drukuje dane podstawowe i pobieram id_genres, aby wyciagnac to info z innej tabeli
 
-          echo ($title."<br>".$description."<br>".$year."<br>".$rating."<br>");
+          echo ('<div id="title_generated" style="color:#ff9090;">Title: </div> <div id="sizing_title">'.$title.'</div> <br>');
+          echo ('<div class = "writecolor">Description: </div>'.$description);
+          echo ('<div class = "writecolor">Release Year: </div>'.$year."<br>");
+
+
+          //  "<br> Description: ".$description."<br>".$year."<br>".$rating."<br>");
 
 // ******** nowe zapytanie do innej tabeli, po gatunek.
 
-          $sql_2 = "SELECT * from genres WHERE idgenres=$id_genres";
+    $sql_2 = "SELECT * from genres WHERE idgenres=$id_genres";
 
-            if($result = @$connection -> query($sql_2)){
-              while($data_2 = mysqli_fetch_array($result)){
-                $genre = $data_2['genre'];
-                echo ($genre."<br>"); // drukuje gatunek
-              }
-            }else{
-              echo "ERROR: Could not able to execute $sql. " . mysqli_error($connection);
-            }
+      if($result = @$connection -> query($sql_2)){
+        while($data_2 = mysqli_fetch_array($result)){
+          $genre = $data_2['genre'];
+          echo ('<div class = "writecolor">Genre: </div>'.$genre."<br>"); // drukuje gatunek
+        }
+      }else{
+         echo "ERROR: Could not able to execute $sql. " . mysqli_error($connection);
+      }
 
 // ******** Wyciaganie id actorow z tabeli actors_movies, grajacych w danym filmie!  
 
-          $sql_3 = "SELECT actor_id FROM actors_movies WHERE movie_id=$id_movie";
+    $sql_3 = "SELECT actor_id FROM actors_movies WHERE movie_id=$id_movie";
 
-            if($result = @$connection -> query($sql_3)){
-              // tworze tablice do ktorej bede przekazywal wartosci id poszczegolnych aktorow do zapytan
-              // pozniej zostanie ona wykorzystana do petli aby wyswietlic info o aktorach.
-              $array_of_actors_id = array();
-                while($data_3 = mysqli_fetch_array($result)){
-                  $actor_id = $data_3['actor_id'];
-                  //echo ($actor_id. "<br> "); // drukuje idiki aktorow
-                  array_push($array_of_actors_id, "$actor_id");
-                }
-            }else{
-                echo "ERROR: Could not able to execute $sql. " . mysqli_error($connection);
-              }
+      if($result = @$connection -> query($sql_3)){
+        // tworze tablice do ktorej bede przekazywal wartosci id poszczegolnych aktorow do zapytan
+        // pozniej zostanie ona wykorzystana do petli aby wyswietlic info o aktorach.
+        $array_of_actors_id = array();
+          while($data_3 = mysqli_fetch_array($result)){
+            $actor_id = $data_3['actor_id'];
+            //echo ($actor_id. "<br> "); // drukuje idiki aktorow
+            array_push($array_of_actors_id, "$actor_id");
+          }
+      }else{
+          echo "ERROR: Could not able to execute $sql. " . mysqli_error($connection);
+        }
 
 // ******** Wyciaganie imienia i nazwiska aktorow grajacych w filmie o danym id z odpowiedniej tabeli! 
 // w petli foreach dla kazdego aktora po kolei jest tworzone zapytanie wycigajace info z bazy. 
-          
-          foreach ($array_of_actors_id as $actor_id) {
+    echo ('<div class = "writecolor">Actors: </div>');     
+    foreach ($array_of_actors_id as $actor_id) {
                 
-             $sql_4 = "SELECT name, surname FROM actors WHERE idactors=$actor_id";
+        $sql_4 = "SELECT name, surname FROM actors WHERE idactors=$actor_id";
             
-              if($result = @$connection -> query($sql_4)){
+        if($result = @$connection -> query($sql_4)){
             
-                $data_4 = mysqli_fetch_array($result);
+          $data_4 = mysqli_fetch_array($result);
                 
-                $name = $data_4['name'];
-                $surname = $data_4['surname'];
-                echo ("<br>".$name." ".$surname."<br>"); // drukuje imie nazwisko aktorow# code...
+          $name = $data_4['name'];
+          $surname = $data_4['surname'];
+          echo ($name." ".$surname."<br>");
+           // drukuje imie nazwisko aktorow# code...
                   
-              }else{
-                echo "ERROR: Could not able to execute $sql. " . mysqli_error($connection);
-              }
-          }     
+        }else{
+          echo "ERROR: Could not able to execute $sql. " . mysqli_error($connection);
+        }
+    }
+     echo ('<div class = "writecolor">Rating: </div>'.$rating."<br>");     
       }
     }else{
         echo "ERROR: Could not able to execute $sql. " . mysqli_error($connection);
-      }
+  }
     
   }
  $connection->close();
