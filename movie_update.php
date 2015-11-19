@@ -1,3 +1,5 @@
+<!-- Php ktory updatuje dane po uzupelnieniu formularza i przekierowuje dalej-->
+ 
 <?php
   require_once "conect.php";
 
@@ -14,13 +16,43 @@
       $id_movie = $_GET['id']; 
       // kolejny warunek po zatwierdzeniu nowego formularza sie wykonuje
       if(isset($_POST['update'])){
-        $new_title = $_POST['new_title'];
+        $new_title = mysqli_real_escape_string($connection, $_POST['new_title']);
         $new_description = $_POST['new_summernote_holder'];
-        $new_year = $_POST['new_year'];
+        $new_year = mysqli_real_escape_string($connection,$_POST['new_year']);
+        $new_rating = $_POST['new_actual_rate'];
+        $new_id_genre = $_POST['new_selection_to_send'];
 
+        $new_title = htmlentities($new_title, ENT_QUOTES, "UTF-8");
+        $new_year = htmlentities($new_year, ENT_QUOTES, "UTF-8");
+
+        $new_actors = $_POST['check_list'];
+
+        $sql_update = "UPDATE movies SET title = '$new_title', description = '$new_description',
+        year = '$new_year', rating = '$new_rating', id_genres = '$new_id_genre' WHERE id_movie = $id_movie";
+
+          if($result = @$connection ->query($sql_update)){
+          // dobre przekierowanie, po aktorach.
+          //Header('Location: movie_details.php?id='.$id_movie);
+          }else{
+            echo "<br><br><br><br>ERROR: Could not able to execute $sql. " . mysqli_error($connection);
+          }
+// AKTORZY NIE DZIAŁAJA JESZCZE
+          if(isset($new_actors)){
+            $new_number_of_checked_boxes = count($new_actors);
+              for ($i=0; $i <$new_number_of_checked_boxes ; $i++) { 
+                $sql_new_actors="UPDATE actors_movies SET actor_id = '.new_actors[$i].' WHERE movie_id=$id_movie";
+                $result = @$connection ->query($sql_new_actors);
+              }
+          }else{
+            echo "You did not choose an actors!";
+          }
+// DOTAD
+
+      }else{
+        echo('<br><br><br><br><nie udalo sie!');
       }
     }
-    }
+  }
 
  $connection->close();
 
@@ -72,7 +104,7 @@
 
         </div>
     </div>
-    <!-- Header -->
+<!--- Zaczyna sie phpwyciagajce dane o aktualnie wybranym filmie Header -->
 
 <?php
 
@@ -148,7 +180,7 @@
     <!-- Main -->
     <div id="content">
       <h2>Edit "<?php echo $title; ?>" movie: </h2>
-      <form class="form-horizontal" id="update_movie" action="/" method="post">
+      <form class="form-horizontal" id="update_movie" action="" method="post">
           <div class="form-group">
             <label for="title" class="col-sm-4 control-label">Title</label>
               <div class="col-sm-4">
@@ -176,7 +208,7 @@
            <div id="forselect" class="form-group" >
             <label for="selection" class="col-sm-4 control-label">Genre</label>
               <div class=" col-sm-3">
-                <select id="selection" name="selection_to_send">
+                <select id="selection" name="new_selection_to_send">
       
                 </select>
               </div>
@@ -190,7 +222,7 @@
             </div>
           </div>
           <div class="form-group">
-          <input type="hidden" class="form-control" name="rate" id="actual_rate">
+          <input type="hidden" class="form-control" name="new_actual_rate" id="new_actual_rate">
           <div id="container_for_error"></div></div>
 
           <!-- Multi wybór aktorów z bazy danych -->

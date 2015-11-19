@@ -15,12 +15,12 @@ function filling(){
 
 			$('#selection').empty();
 			$('#selection').append('<option value = "">--Select Genre--</option>');
-
-			//console.log(data[genre_edit_id-1].genre);
+// zmienna genre_edit_id jest deklarowana w pliku movie_update.php w osobnym skrypcie js
+// jest to zmienna z id gatunku edytowanego filmu.
 			$.each(data,function(i, item) {
-				
+// -1 ze wzgledu na numeracje iteracji petli each (od 0) a rekordy id w bazie od 1.
 				if (i==genre_edit_id-1){
-					$('#selection').append('<option value ="' + (genre_edit_id-1) + '" selected="selected" >' + data[genre_edit_id-1].genre +
+					$('#selection').append('<option value ="' + (genre_edit_id) + '" selected="selected" >' + data[genre_edit_id-1].genre +
 				 	'</option>');
 				}else{
 					$('#selection').append('<option value ="' + data[i].idgenres + '" >' + data[i].genre +
@@ -34,11 +34,12 @@ function filling(){
  		 	console.log(textStatus, errorThrown);
 		}	
 	});
-
-//pobieram zmienna z php ktora jest stringiem i zamieniam ja na tablice.
+//	WYSWIETLANIE CHECKBOXOW AKTOROW Z ZAZNACZONYMI WCZESNIEJ CHECKBOXAMI. 
+//pobieram zmienna z php ktora jest stringiem i zamieniam ja na tablice. NIE DZIALA
 	var array_of_actors_id_edit = string_of_actors_id_edit.split(",");
 	var array_of_actors_id_edit2 = array_of_actors_id_edit.reverse();
-	//console.log(array_of_actors_id_edit[0]);
+	
+
 	$.ajax({
 		type: 'POST',
 		url: 'selact.php',
@@ -49,42 +50,12 @@ function filling(){
 			console.log(array_of_actors_id_edit2[0]);
 			console.log(array_of_actors_id_edit2[1]);
 			console.log(data.length);
-			//$.each(data,function(i, item) {
-
-
-				for(j=0;j<data.length;j++){
-
-					for(k=0;k<array_of_actors_id_edit2.length;k++){
-						if(data[j].idactors == array_of_actors_id_edit2[k]){
-
-							$('#actors').append('<input type = "checkbox" id="' + 'cb' + data[j].idactors + 
-							'" value = "'+data[j].idactors+'" name = "check_list[]" checked = "checked">'
-						 	+ " " + data[j].name + " "+ data[j].surname + '<br>');
-
-						}
-					}
-
-					// if(data[j].idactors !== array_of_actors_id_edit2)
-					// 		$('#actors').append('<input type = "checkbox" id="' + 'cb' + data[j].idactors + 
-					// 		'" value = "'+data[j].idactors+'" name = "check_list[]" >'
-					// 	 	+ " " + data[j].name + " "+ data[j].surname + '<br>');					
-						console.log(array_of_actors_id_edit2);
-				}
+				$.each(data,function(i, item) {
 					
-
-
-						//console.log('s');
-
-					
-
-
-					
-
-					
-
-				//});
-			
-				
+					$('#actors').append('<input type = "checkbox" id="' + 'cb' + data[i].idactors + 
+					'" value = "'+data[i].idactors+'" name = "check_list[]" checked>' + " " + data[i].name + " "
+					 + data[i].surname + '<br>');
+				});
 		},
 		
 
@@ -144,7 +115,7 @@ $(document).ready(function(){
 	
 	//console.log(rating_edit);
 
-
+	$('#new_actual_rate').val(rating_edit);
 	$('#jRate').jRate({
 		count: 10,
 		startColor: "red",
@@ -154,7 +125,7 @@ $(document).ready(function(){
   		precision: 0.5,
   		rating: rating_edit/2,
   		onSet: function(rating) {
-    		$('#actual_rate').val(rating*2);
+    		$('#new_actual_rate').val(rating*2);
   		}
 	}),
 
@@ -162,8 +133,8 @@ $(document).ready(function(){
 
 		height: 150,// nie wykonuje sie nic z onChnange, a wczesniej robilo
 		onInit: function(contents, $editable) {
-		 cleanText = $('#summernote_field').code(description_edit);
-    	$('#summernote_plain').val(cleanText);
+		$('#summernote_field').code(description_edit);
+    	$('#summernote_plain').val(description_edit);
     	//console.log(description_edit);
   		},
 
@@ -173,28 +144,5 @@ $(document).ready(function(){
             }, 10);
         }
 	});
-
-
-	// $('#add_movie').on('submit', function(par){
-	// 	par.preventDefault();
-	// 	var form = $(this);
-	// 	console.log(form.find("select,textarea, input").serialize());
-
-	// 	if($('#add_movie').valid()){
-	// 		$.ajax({
-	// 			type: 'POST',
-	// 			url: 'adding.php',
-	// 			data: form.serialize(),
-	// 			success: function(result){
-	// 				$('#add_movie')[0].reset();
-	// 				$('#summernote_field').code('');
-	// 				$('#jRate').val(0);
-	// 				alert('Great! Thanks for adding a movie! \nHave a nice day!');
-	// 			}
-	// 		});
-	// 	}else{
-
-	// 	}
-	// });
 	
    });
