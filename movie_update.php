@@ -1,5 +1,4 @@
-<!-- Php ktory updatuje dane po uzupelnieniu formularza i przekierowuje dalej-->
- 
+<!-- Php ktory updatuje dane po uzupelnieniu formularza i przekierowuje dalej--> 
 <?php
   require_once "conect.php";
 
@@ -34,7 +33,7 @@
           // dobre przekierowanie, po aktorach.
           //Header('Location: movie_details.php?id='.$id_movie);
           }else{
-            echo "<br><br><br><br>ERROR: Could not able to execute $sql. " . mysqli_error($connection);
+            echo "ERROR: Could not able to execute $sql. " . mysqli_error($connection);
           }
 // AKTORZY NIE DZIAŁAJA JESZCZE
           if(isset($new_actors)){
@@ -49,7 +48,7 @@
 // DOTAD
 
       }else{
-        echo('<br><br><br><br><nie udalo sie!');
+        echo('<nie udalo sie!');
       }
     }
   }
@@ -57,7 +56,6 @@
  $connection->close();
 
 ?>
-
 <!DOCTYPE HTML>
 <html lang="pl">
 <head>
