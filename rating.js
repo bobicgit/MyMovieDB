@@ -142,6 +142,10 @@ $(document).ready(function(){
 		}else{
 
 		}
+	}),
+
+	$('.confirmation').on('click', function(){
+		return confirm('Are you sure?');
 	});
 	
    });

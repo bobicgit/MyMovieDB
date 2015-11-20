@@ -90,6 +90,10 @@
         echo "ERROR: Could not able to execute $sql. " . mysqli_error($connection);
       }
     
+    if(!empty($_GET['message'])){
+      $delete_msg = $_GET['message'];
+      echo "<script type='text/javascript'>alert('$delete_msg');</script>";
+    }
   }
  $connection->close();
 

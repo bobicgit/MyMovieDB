@@ -150,7 +150,8 @@
     }else{
         echo "ERROR: Could not able to execute $sql. " . mysqli_error($connection);
   }
-        echo ('<a href="movie_update.php?id=' . $id_movie . '"> Edit: '. $title .'</a><br>');
+        echo ('<a href="movie_update.php?id=' . $id_movie . '"> Edit: <br>'. $title .'</a><br>');
+        echo ('<a href="movie_delete.php?id=' . $id_movie . '" class = "confirmation"> Delete: <br>'. $title .'</a><br>');
   }
  $connection->close();
 
