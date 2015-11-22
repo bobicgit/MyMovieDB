@@ -75,22 +75,29 @@
     
       if($result = @$connection ->query($sql)){
 
+      	echo "<table>";
+      	echo "<th> Position </th>";
+      	echo "<th> Title </th>";
+      	echo "<th> Rate </th>";
         while($data = mysqli_fetch_array($result)){
 
-          $id_movie = $data['id_movie'];
-          $title = $data['title'];
-          $rating = $data['rating'];
+         	$id_movie = $data['id_movie'];
+         	$title = $data['title'];
+         	$rating = $data['rating'];
 
-          echo ('<a href="movie_details.php?id=' . $id_movie . '" >' . $title .' .......... Rating: '.$rating.'</a><br>');
-          // Tworzy unikatowe linki z danym id filmu. Id bedzie przesylane do pliku movie_details 
-          //  i wyseitlane beda tam o nim informacje z bazy danych.
-          //var_dump($id_movie);
+         	for($n=1 ; $n<11 ; $n++){
+          		echo  '<tr><td>' . $n . '</td><td> <a href = "movie_details.php?id='. $id_movie.'">' . $title. '</a></td><td> ' . $rating . '</td></tr>' ; 
+          
+          		// Tworzy unikatowe linki z danym id filmu. Id bedzie przesylane do pliku movie_details 
+          		//  i wyseitlane beda tam o nim informacje z bazy danych.
+          		//var_dump($id_movie);
+      		}
         }
-
+        echo "</table>";
       }else{
         echo "ERROR: Could not able to execute $sql. " . mysqli_error($connection);
       }
-    
+    	
   }
  $connection->close();
 
