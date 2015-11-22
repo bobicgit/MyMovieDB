@@ -127,8 +127,11 @@
 
 // ******** Wyciaganie imienia i nazwiska aktorow grajacych w filmie o danym id z odpowiedniej tabeli! 
 // w petli foreach dla kazdego aktora po kolei jest tworzone zapytanie wycigajace info z bazy. 
-    echo ('<div class = "writecolor">Actors: </div>');     
-    foreach ($array_of_actors_id as $actor_id) {
+    echo ('<div class = "writecolor">Actors: </div>'); 
+      if(empty($array_of_actors_id)){
+        echo ('Sorry! No actors have been chosen :(');
+      }    
+      foreach ($array_of_actors_id as $actor_id) {
                 
         $sql_4 = "SELECT name, surname FROM actors WHERE idactors=$actor_id";
             
@@ -138,9 +141,7 @@
                 
           $name = $data_4['name'];
           $surname = $data_4['surname'];
-          echo ($name." ".$surname."<br>");
-           // drukuje imie nazwisko aktorow# code...
-                  
+          echo ($name." ".$surname."<br>");   
         }else{
           echo "ERROR: Could not able to execute $sql. " . mysqli_error($connection);
         }
