@@ -1,73 +1,4 @@
-<!-- Php ktory updatuje dane po uzupelnieniu formularza i przekierowuje dalej--> 
-<?php
-  require_once "conect.php";
 
-  $connection = @new mysqli($host,$db_user,$db_pass,$db_name);
-
-  if($connection ->connect_errno!=0){
-
-    echo "Error: ".$connection->connect_errno."Opis: ".$connection->connect_error;
-    // to echo wykona sie tylko wtedy gdy polaczenia nie uda sie ustanowic.
-    // wyswietli numer bledu
-  }else{
-
-    if(isset($_GET['id'])){
-      $id_movie = $_GET['id']; 
-      // kolejny warunek po zatwierdzeniu nowego formularza sie wykonuje
-      if(isset($_POST['update'])){
-        $new_title = mysqli_real_escape_string($connection, $_POST['new_title']);
-        $new_description = $_POST['new_summernote_holder'];
-        $new_year = mysqli_real_escape_string($connection,$_POST['new_year']);
-        $new_rating = $_POST['new_actual_rate'];
-        $new_id_genre = $_POST['new_selection_to_send'];
-
-        $new_title = htmlentities($new_title, ENT_QUOTES, "UTF-8");
-        $new_year = htmlentities($new_year, ENT_QUOTES, "UTF-8");
-
-        $new_actors = $_POST['new_check_list'];
-
-        $sql_update = "UPDATE movies SET title = '$new_title', description = '$new_description',
-        year = '$new_year', rating = '$new_rating', id_genres = '$new_id_genre' WHERE id_movie = $id_movie";
-
-          if($result = @$connection ->query($sql_update)){
-          // dobre przekierowanie, po aktorach.
-          //Header('Location: movie_details.php?id='.$id_movie);
-          }else{
-            echo "ERROR: Could not able to execute $sql. " . mysqli_error($connection);
-          }
-// AKTORZY NIE DZIAŁAJA JESZCZE
-          if(isset($new_actors)){
-            $new_number_of_checked_boxes = count($new_actors);
-            
-            if($new_number_of_checked_boxes == $old_number_of_checked_boxes){
-
-              for ($i=0; $i <$new_number_of_checked_boxes ; $i++) { 
-
-                $sql_new_actors_equal="UPDATE actors_movies SET actor_id = '.new_actors[$i].' WHERE movie_id=$id_movie";
-                $result = @$connection ->query($sql_new_actors_equal);
-
-              }
-            }else if($new_number_of_checked_boxes > $old_number_of_checked_boxes){
-
-
-            }else{
-
-            }
-          
-          }else{
-            echo "<br><br><br><br><br>You did not choose an actors!";
-          }
-// DOTAD
-
-      }else{
-        echo('<nie udalo sie!');
-      }
-    }
-  }
-
- $connection->close();
-
-?>
 <!DOCTYPE HTML>
 <html lang="pl">
 <head>
@@ -96,6 +27,87 @@
 </head>
 
 <body>
+  <!-- Php ktory updatuje dane po uzupelnieniu formularza i przekierowuje dalej--> 
+<?php
+  require_once "conect.php";
+
+  $connection = @new mysqli($host,$db_user,$db_pass,$db_name);
+
+  if($connection ->connect_errno!=0){
+
+    echo "Error: ".$connection->connect_errno."Opis: ".$connection->connect_error;
+
+  }else{
+
+    if(isset($_GET['id'])){
+      $id_movie = $_GET['id']; 
+// kolejny warunek po zatwierdzeniu nowego formularza sie wykonuje
+      if(isset($_POST['update'])){
+        $new_title = mysqli_real_escape_string($connection, $_POST['new_title']);
+        $new_description = $_POST['new_summernote_holder'];
+        $new_year = mysqli_real_escape_string($connection,$_POST['new_year']);
+        $new_rating = $_POST['new_actual_rate'];
+        $new_id_genre = $_POST['new_selection_to_send'];
+
+        $new_title = htmlentities($new_title, ENT_QUOTES, "UTF-8");
+        $new_year = htmlentities($new_year, ENT_QUOTES, "UTF-8");
+
+
+        $sql_update = "UPDATE movies SET title = '$new_title', description = '$new_description',
+        year = '$new_year', rating = '$new_rating', id_genres = '$new_id_genre' WHERE id_movie = $id_movie";
+
+          if($result = @$connection ->query($sql_update)){
+
+          }else{
+            echo "ERROR: Could not able to execute $sql_update. " . mysqli_error($connection);
+          }
+// AKTORZY usuwanie starych rekordow i dodawanie nowych. W pierwszej kolejnosci sprawdzane jest czy ustawiona
+// jest tablica checkboxow. Jesli tak to usuwa i dodaje nowe rekordy. Jesli nie, to oznacza, ze zaden nie 
+// został zaznaczony, wiec rowniez aktualizujemy baze, usuwajac rekordy.
+          
+          if(isset($_POST['new_check_list'])){
+            $new_actors = $_POST['new_check_list'];
+            
+              if(isset($new_actors)){
+                $new_number_of_checked_boxes = count($new_actors);
+
+                $sql_actors_delete = "DELETE FROM actors_movies WHERE movie_id = $id_movie";
+
+                  if($result = @$connection ->query($sql_actors_delete)){ }else{
+                    echo "ERROR: Could not able to execute $sql_movie_delete. " . mysqli_error($connection);
+                  }
+
+                  for ($i=0; $i <$new_number_of_checked_boxes ; $i++) { 
+
+                    $sql_new_actors_add="INSERT INTO actors_movies (id,actor_id, movie_id) 
+                    Values (NUll, '.$new_actors[$i].', '$id_movie')";
+
+                      if($result = @$connection ->query($sql_new_actors_add)){ }else{
+                        echo "ERROR: Could not able to execute $sql_new_actors_add. " . mysqli_error($connection);
+                      }
+                    }
+
+                Header('Location: movie_details.php?id='.$id_movie);
+              }else{
+
+                echo('<script>console.log("You did not choose any actors!");</script');
+              }
+          }else{
+
+            $sql_actors_delete = "DELETE FROM actors_movies WHERE movie_id = $id_movie";
+
+                  if($result = @$connection ->query($sql_actors_delete)){ }else{
+                    echo "ERROR: Could not able to execute $sql_movie_delete. " . mysqli_error($connection);
+                  }
+            Header('Location: movie_details.php?id='.$id_movie);
+          }
+      }
+    }
+  }
+
+ $connection->close();
+
+?>
   <div id="container">
 
     <!-- Navigation -->
@@ -114,7 +126,7 @@
 
         </div>
     </div>
-<!--- Zaczyna sie phpwyciagajce dane o aktualnie wybranym filmie Header -->
+<!--- Zaczyna sie phpwyciagajce dane o aktualnie wybranym filmie -->
 
 <?php
 
@@ -125,15 +137,12 @@
   if($connection ->connect_errno!=0){
 
     echo "Error: ".$connection->connect_errno."Opis: ".$connection->connect_error;
-    // to echo wykona sie tylko wtedy gdy polaczenia nie uda sie ustanowic.
-    // wyswietli numer bledu
-  }else{
 
-  
+  }else{
 
 // ********** Wybieranie informacji z bazy danych o filmie o danym id. Wartości te będą ustawione w formularzu jako początkowe, do edycji. ************//
 
-      $id_movie_edit = $_GET['id']; // pobiera id z linku ktory tworzy sie w petli while w pliku all_movies
+      $id_movie_edit = $_GET['id']; // pobiera id z linku ktory tworzy sie w petli while w pliku movie_details
 
 // 1. zapytanie wyciaga wszystkie dane z tabeli movies o filmie z danym id.
       $sql_1 = "SELECT * FROM movies WHERE id_movie = $id_movie_edit";
@@ -153,32 +162,31 @@
 
 // 2. zapytanie Wyciaganie id actorow z tabeli actors_movies, grajacych w danym filmie
       $sql_2 = "SELECT actor_id FROM actors_movies WHERE movie_id=$id_movie_edit";
-
+       
         if($result2 = @$connection -> query($sql_2)){
-        // tworze tablice do ktorej bede przekazywal wartosci id poszczegolnych aktorow do zapytan
-        // pozniej zostanie ona wykorzystana do petli aby wyswietlic info o aktorach.
-        $array_of_actors_id = array();
+// tworze tablice do ktorej bede przekazywal wartosci id poszczegolnych aktorow do zapytan
+// pozniej zostanie ona wykorzystana do petli aby wyswietlic info o aktorach.
+         $array_of_actors_id = array();
+
           while($data_2 = mysqli_fetch_array($result2)){
             $actor_id_edit = $data_2['actor_id'];
-            // trzwe tablice z idkami aktorow PHP
+// uzupelniam wczesniej utworzona tablice
             array_push($array_of_actors_id, "$actor_id_edit");
-            // nastepnie tworze zmienna, ktorze przechowuje ilosc wybranych id,
-            // potrzebne to do porownania z nowo zaznaczona iloscia.
-            $old_number_of_checked_boxes = count($array_of_actors_id);
-            // konwertuje tablice do postaci stringa, aby ja przekazac do javascriptu, gdzie pozniej
-            // bede tworzyc z tego tablice
             
-            $string_of_actors_id_edit = implode(",",$array_of_actors_id);
-
-
           }
+// Sprawdzam, czy tablica jest pusta, a potem konwertuje tablice do postaci stringa, aby ja przekazac do 
+// javascriptu, 
+            if(empty($array_of_actors_id)){
+              $string_of_actors_id_edit = '';
+            }else{
+              $string_of_actors_id_edit = implode(",",$array_of_actors_id);
+            }
 
       }else{
           echo "ERROR: Could not able to execute $sql_2. " . mysqli_error($connection);
         }
 
-
-    } // glowny if z isset id
+    } 
 
  $connection->close();
 
@@ -277,8 +285,8 @@
 <script type="text/javascript">
   var genre_edit_id = "<?= $id_genres ?>";
   var description_edit = '<?= $description ?>';
-  var rating_edit = '<?=$rating ?>';
-  var string_of_actors_id_edit = '<?=$string_of_actors_id_edit ?>'
+  var rating_edit = "<?=$rating ?>";
+  var string_of_actors_id_edit = '<?=$string_of_actors_id_edit ?>';
 </script>
 <script type="text/javascript" src="rating_edit.js"></script>
 
