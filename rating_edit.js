@@ -115,9 +115,10 @@ $(function myval(){
 		},
 		errorPlacement: function(error, element) {
   			if(element.attr("name") == "rate") {
-    			error.appendTo( '#container_for_error');
+  				error.insertBefore(element);
+    			
   			} else {
-    			error.insertAfter(element);
+    			error.insertBefore(element);
   			}
 		}
 

@@ -67,8 +67,9 @@
   				<div class="form-group">
     				<label for="despription" class="col-sm-4 control-label">Description</label>
     					<div  class="col-sm-4">
+                <input type="hidden" class="form-control" name="summernote_holder" id="summernote_plain" >
       						<textarea id = "summernote_field" class="form-control" rows="4"></textarea>
-                  <input type="hidden" class="form-control" name="summernote_holder" id="summernote_plain" >
+                  
     					</div>
   				</div>
 
@@ -91,22 +92,25 @@
   				</div>
 
   				<!-- rating RATING PLUGIN podpinasz plugin pod siatke bootstrapa z class col-sm-->
-  				<div  class="form-group ">
+  				<div  class="form-group" id="for_rating">
   					<label for="jRate" class="col-sm-4 control-label">Rating</label>
   					<div class=" col-sm-1" id="jRate">
   						<!-- tutaj siedza wszystkie gwiazki z jRate plugin -->
+              <div  >
+                  <!-- <div class="form-group" id="container_for_error"></div> -->
+                  <input type="hidden" class="form-control" name="rate" id="actual_rate">
+            </div>
   					</div>
+            
   				</div>
-          <div class="form-group">
-          <input type="hidden" class="form-control" name="rate" id="actual_rate">
-          <div id="container_for_error"></div></div>
+
+
 
           <!-- Multi wybór aktorów z bazy danych -->
   				 <div id="formultiselect" class="form-group" >
   					<label for="selection" class="col-sm-4 control-label">Actors</label>
   						<div class=" col-sm-3" id="actors">
-                
-                <!-- tutaj siedzi wynik z jRate plugin, ktory pobieram potwirdzajac formularz -->
+
                 
   						</div>
   				</div>
