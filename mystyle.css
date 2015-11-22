@@ -1,6 +1,6 @@
  /*{
   border: dashed white 1px;
-}*/ 
+} */
 
 html, body{
 	margin: 0;
@@ -14,6 +14,10 @@ html, body{
 
 body{padding-top:50px;}
 
+h2{
+	text-align: center;
+}
+
 #container{
 	width: 100%;
 }
@@ -23,6 +27,8 @@ body{padding-top:50px;}
 	width:100%;
 	padding: 40px 0;
 }
+ 
+/*LOGO*/
 
 #logo{
 	width:450px;
@@ -42,14 +48,12 @@ body{padding-top:50px;}
 	margin-right: 35px;
 }
 
+/*NAWIGACJA*/
+
 .navbar{
 	padding-top: 10px;
 	padding-bottom: 10px;
 	background-color: #D70A0A;
-}
-
-h2{
-	text-align: center;
 }
 
 #nav a{
@@ -59,6 +63,7 @@ h2{
 	color: #ff9090;
 }
 
+/*ZAWARTOSC STRONY*/
 
 #content {
 	margin-top: 40px;
@@ -87,19 +92,6 @@ h2{
 	/*margin-bottom: 5px;*/
 }
 
-#actual_rate{
-	width: 1%;
-	height: 2px;
-	margin-left: 445px;
-	margin-right: auto;
-	margin-top: -16px;
-}
-
-#container_for_error{
-	width:20%;
-	margin-left: 466px;
-	margin-top: -17px;
-}
 
 label.error{
 	color:#ff9090;
@@ -142,6 +134,8 @@ input[type="checkbox"]{
 	color:#ff9090;
 }
 
+/*PODSTRONA ALL_MOVIES*/
+
 #all_movies{
 	margin-right: auto;
 	margin-left: auto;
@@ -163,6 +157,7 @@ input[type="checkbox"]{
 	font-size: 19px;
 }
 
+/*PODSTRONA MOVIE_DETAILS*/
 
 #specific_movie{
 	width: 40%;
@@ -207,6 +202,21 @@ a button:hover{
 	color:#ff9090;
 } 
 
+table  {
+	margin-left: auto;
+	margin-right: auto;
+	border: 2px solid lightgrey;
+}
+
+th, td, th {
+	border: 1px solid lightgrey;
+	min-width: 50px;
+	width: auto;
+	padding: 5px;
+	text-align: center;
+}
+/*PODSTRONA CONTACT*/
+
 #contact {
 	width: 50%;
 	text-align: center;
@@ -215,6 +225,8 @@ a button:hover{
 	margin-left: auto;	
 	line-height: 1.5em;
 }
+
+/*LINKI SPOLECZNOSCIOWE*/
 
 #socials {
 	margin-top:40px;
@@ -276,7 +288,10 @@ a.sociallink{
 
 }
 
+/*FOOTER*/
+
 #footer {
 	padding:30px;
-	height:50px;
+	height:40px;
+	margin-bottom: -20px;
 }
