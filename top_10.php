@@ -79,19 +79,20 @@
       	echo "<th> Position </th>";
       	echo "<th> Title </th>";
       	echo "<th> Rate </th>";
-        while($data = mysqli_fetch_array($result)){
+      	$n=1;
+        while(($data = mysqli_fetch_array($result)) && ($n<11)){
 
          	$id_movie = $data['id_movie'];
          	$title = $data['title'];
          	$rating = $data['rating'];
 
-         	for($n=1 ; $n<11 ; $n++){
+         
           		echo  '<tr><td>' . $n . '</td><td> <a href = "movie_details.php?id='. $id_movie.'">' . $title. '</a></td><td> ' . $rating . '</td></tr>' ; 
           
           		// Tworzy unikatowe linki z danym id filmu. Id bedzie przesylane do pliku movie_details 
           		//  i wyseitlane beda tam o nim informacje z bazy danych.
           		//var_dump($id_movie);
-      		}
+      		$n++;
         }
         echo "</table>";
       }else{
