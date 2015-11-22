@@ -24,7 +24,7 @@
         $new_title = htmlentities($new_title, ENT_QUOTES, "UTF-8");
         $new_year = htmlentities($new_year, ENT_QUOTES, "UTF-8");
 
-        $new_actors = $_POST['check_list'];
+        $new_actors = $_POST['new_check_list'];
 
         $sql_update = "UPDATE movies SET title = '$new_title', description = '$new_description',
         year = '$new_year', rating = '$new_rating', id_genres = '$new_id_genre' WHERE id_movie = $id_movie";
@@ -38,12 +38,24 @@
 // AKTORZY NIE DZIAŁAJA JESZCZE
           if(isset($new_actors)){
             $new_number_of_checked_boxes = count($new_actors);
+            
+            if($new_number_of_checked_boxes == $old_number_of_checked_boxes){
+
               for ($i=0; $i <$new_number_of_checked_boxes ; $i++) { 
-                $sql_new_actors="UPDATE actors_movies SET actor_id = '.new_actors[$i].' WHERE movie_id=$id_movie";
-                $result = @$connection ->query($sql_new_actors);
+
+                $sql_new_actors_equal="UPDATE actors_movies SET actor_id = '.new_actors[$i].' WHERE movie_id=$id_movie";
+                $result = @$connection ->query($sql_new_actors_equal);
+
               }
+            }else if($new_number_of_checked_boxes > $old_number_of_checked_boxes){
+
+
+            }else{
+
+            }
+          
           }else{
-            echo "You did not choose an actors!";
+            echo "<br><br><br><br><br>You did not choose an actors!";
           }
 // DOTAD
 
@@ -150,8 +162,12 @@
             $actor_id_edit = $data_2['actor_id'];
             // trzwe tablice z idkami aktorow PHP
             array_push($array_of_actors_id, "$actor_id_edit");
+            // nastepnie tworze zmienna, ktorze przechowuje ilosc wybranych id,
+            // potrzebne to do porownania z nowo zaznaczona iloscia.
+            $old_number_of_checked_boxes = count($array_of_actors_id);
             // konwertuje tablice do postaci stringa, aby ja przekazac do javascriptu, gdzie pozniej
             // bede tworzyc z tego tablice
+            
             $string_of_actors_id_edit = implode(",",$array_of_actors_id);
 
 

@@ -49,13 +49,30 @@ function filling(){
 			console.log(data);
 			console.log(array_of_actors_id_edit2[0]);
 			console.log(array_of_actors_id_edit2[1]);
-			console.log(data.length);
-				$.each(data,function(i, item) {
-					
-					$('#actors').append('<input type = "checkbox" id="' + 'cb' + data[i].idactors + 
-					'" value = "'+data[i].idactors+'" name = "check_list[]" checked>' + " " + data[i].name + " "
-					 + data[i].surname + '<br>');
-				});
+			
+				console.log(data.length);
+				var j = 0;
+				var i = 0;
+				for(i ; i<data.length ; i++){
+
+							
+							$('#actors').append('<input type = "checkbox" id="' + 'cb' + data[i].idactors + 
+							'" value = "'+data[i].idactors+'" name = "new_check_list[]"  >' + " " + data[i].name + " "
+							+ data[i].surname + '<br>');
+	
+
+					for(j=0 ; j<array_of_actors_id_edit2.length ; j++){
+
+
+
+						if (data[i].idactors == array_of_actors_id_edit2[j]){
+							
+							$('#cb'+data[i].idactors+'').attr('checked', true);
+
+						}
+					}
+
+				}
 		},
 		
 
