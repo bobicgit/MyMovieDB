@@ -34,11 +34,20 @@ function filling(){
  		 	console.log(textStatus, errorThrown);
 		}	
 	});
+
+// pobieram zmienna z php string_of_actors_id_edit i sprawdzam, czy jest pustym lancuchem, czy nie. Jesli tak
+// tworze pusta tablice, ktora bede wykorzystywac w petli podczas wyswietlania odpowiednich checkboxow (w
+//	tym przypadku aby zadne nie byly zaznaczone). Jesli nie jest to pusty lancuch, to zamieniam go na
+// tablice z wartosciami, ktora tez bedzie wykorzystana podczas wysweitlania zaznaczonych chackboxow.
+	if (string_of_actors_id_edit === '') {
+		var array_of_actors_id_edit2 = [];
+
+	}else {
+		var array_of_actors_id_edit = string_of_actors_id_edit.split(",");
+		var array_of_actors_id_edit2 = array_of_actors_id_edit.reverse();
+		console.log(array_of_actors_id_edit2);
+	}
 //	WYSWIETLANIE CHECKBOXOW AKTOROW Z ZAZNACZONYMI WCZESNIEJ CHECKBOXAMI. 
-//pobieram zmienna z php ktora jest stringiem i zamieniam ja na tablice. NIE DZIALA
-	var array_of_actors_id_edit = string_of_actors_id_edit.split(",");
-	var array_of_actors_id_edit2 = array_of_actors_id_edit.reverse();
-	
 
 	$.ajax({
 		type: 'POST',
@@ -47,35 +56,25 @@ function filling(){
 		dataType:'json',
 		success: function(data) {
 			console.log(data);
-			console.log(array_of_actors_id_edit2[0]);
-			console.log(array_of_actors_id_edit2[1]);
 			
 				console.log(data.length);
 				var j = 0;
 				var i = 0;
 				for(i ; i<data.length ; i++){
 
-							
 							$('#actors').append('<input type = "checkbox" id="' + 'cb' + data[i].idactors + 
 							'" value = "'+data[i].idactors+'" name = "new_check_list[]"  >' + " " + data[i].name + " "
 							+ data[i].surname + '<br>');
-	
-
+// po dodaniu wszystkich checkboxow, sprawdzam, ktore idaktorow sa takie same jak w tablicy pobranej z php
+// jesli sa, to zmieniam atrybut inputa, aby wyswietlal sie zaznaczony.
 					for(j=0 ; j<array_of_actors_id_edit2.length ; j++){
-
-
-
 						if (data[i].idactors == array_of_actors_id_edit2[j]){
 							
 							$('#cb'+data[i].idactors+'').attr('checked', true);
-
 						}
 					}
-
 				}
 		},
-		
-
 		error: function(jqXHR, textStatus, errorThrown) {
  		 	console.log(textStatus, errorThrown);
 		}	
@@ -130,8 +129,6 @@ $(document).ready(function(){
 
 	filling();
 	
-	//console.log(rating_edit);
-
 	$('#new_actual_rate').val(rating_edit);
 	$('#jRate').jRate({
 		count: 10,
