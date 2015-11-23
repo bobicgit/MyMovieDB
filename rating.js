@@ -137,7 +137,10 @@ $(document).ready(function(){
 					$('#add_movie')[0].reset();
 					$('#summernote_field').code('');
 					$('#jRate').val(0);
-					alert('Great! Thanks for adding a movie! \nHave a nice day!');
+					console.log(result);
+					if (typeof result === 'string'){
+						alert(result);
+					}
 				}
 			});
 		}else{

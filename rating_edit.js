@@ -152,12 +152,21 @@ $(document).ready(function(){
     	$('#summernote_plain').val(description_edit);
     	//console.log(description_edit);
   		},
+		onChange: function(contents, $editable) {
+		cleanText = $('#summernote_field').code();
+    	$('#summernote_plain').val(cleanText);
+    	console.log(cleanText);
+  		},
 
   		onpaste: function(content) {
             setTimeout(function () {
                 editor.code(content.target.textContent);
             }, 10);
         }
+	}),
+	
+		$('.confirmation').on('click', function(){
+		return confirm('Are you sure?');
 	});
 	
    });
