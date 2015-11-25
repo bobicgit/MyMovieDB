@@ -135,7 +135,7 @@
 		</div>
 		<!-- Footer -->
 		<div id="footer">
-			Maciej Mańko &copy; 2015r. &nbsp;&nbsp;&nbsp;&nbsp;"I have come here to chew bubblegum and kick ass... and I'm all out of bubblegum.” - Nada, They Live (1988)
+			Maciej Mańko &copy; 2015r. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"I have come here to chew bubblegum and kick ass... and I'm all out of bubblegum.” - Nada, They Live (1988)
 		</div>
 	</div>
 <script type="text/javascript" src="rating.js"></script>
