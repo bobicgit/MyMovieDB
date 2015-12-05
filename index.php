@@ -26,24 +26,29 @@
 </head>
 
 <body>
-	<div id="container">
+
 
 		<!-- Navigation -->
 		<div  id="nav" class="navbar navbar-default navbar-fixed-top">
  			<div class="navbar-header">
  				<a class="navbar-brand" href="index.php" style="font-weight:bold; font-size: 30px;" >MoviesDB</a>
-
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
     		</div>
-    		<div class="navbar-collapse collapse">
+    		<div class="navbar-collapse collapse" id="bs-example-navbar-collapse-1">
       			<ul class="nav navbar-nav" >
         			<li ><a href="index.php">Home</a></li>
         			<li><a href="all_movies.php">Movies</a></li>
         			<li><a href="top_10.php">Top 10</a></li>
         			<li><a href="contact.php">Contact</a></li>
       			</ul>
-
     		</div>
 		</div>
+
 		<!-- Header -->
 
 		<div id="header">
@@ -53,6 +58,7 @@
 				<div style="clear:both">
 			</div>
 		</div>
+
 		<!-- Main -->
 		<div id="content">
 			<h2>Add your favorite movies to my database!</h2>
@@ -107,15 +113,11 @@
 
 
           <!-- Multi wybór aktorów z bazy danych -->
-  				 <div id="formultiselect" class="form-group" >
+  				<div id="formultiselect" class="form-group" >
   					<label for="selection" class="col-sm-4 control-label">Actors</label>
   						<div class=" col-sm-3" id="actors">
-
-                
   						</div>
   				</div>
-
-
   				<div class="form-group">
     				<div class="col-sm-offset-5 col-sm-2">
       					<button type="submit" class="btn btn-default" id="subbut">Add a movie!</button>
@@ -139,6 +141,7 @@
 		</div>
 	</div>
 <script type="text/javascript" src="rating.js"></script>
+<script type="text/javascript" src="bootstrap.min.js"></script>
 
 </body>
 </html>
