@@ -134,17 +134,28 @@
 			</form>
 		</div>
 
-		<div id="socials">
-			<div id="socialdivs"> <!-- jednakowe wymiary dla socialdivs i divach w srodku -->
-				<div class="fb"><a href="http://www.facebook.com" target="_blank" title="Facebook" class="sociallink"><i class="icon-facebook-circled"></i></a></div>
-				<div class="fw"><a href="http://www.filmweb.pl" target="_blank" title="Filmweb" class="sociallink"><i class="icon-videocam"></i></a></div>
-				<div class="imdb"><a href="http://www.imdb.com" target="_blank" title="IMDB" class="sociallink"><i class="icon-video"></i></a></div>
-				<div class="kmf"><a href="http://www.kmf.org.pl" target="_blank" title="KMF" class="sociallink"><i class="icon-video-1"></i></a></div>
-				<div styl="clear:both"></div>
-			</div>
-		</div>
+<!-- SOCIAL LINKS -->
 
-
+<section id= "wraper_for_socials">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-3 col-sm-12 col-xs-12 center-block">        
+        <div class="fb"><a href="http://www.facebook.com" target="_blank" title="Facebook" class="sociallink"><i class="icon-facebook-circled"></i></a></div>
+</div>
+      <div class="col-md-3 col-sm-12 col-xs-12 center-block">        
+        <div class="fw"><a href="http://www.filmweb.pl" target="_blank" title="Filmweb" class="sociallink"><i class="icon-videocam"></i></a></div>
+</div>
+      <div class="col-md-3 col-sm-12 col-xs-12 center-block">        
+        <div class="imdb"><a href="http://www.imdb.com" target="_blank" title="IMDB" class="sociallink"><i class="icon-video"></i></a></div>
+</div>
+      <div class="col-md-3 col-sm-12 col-xs-12 center-block">        
+        <div class="kmf"><a href="http://www.kmf.org.pl" target="_blank" title="KMF" class="sociallink"><i class="icon-video-1"></i></a></div>
+</div>
+<div styl="clear:both"></div>
+    </div> <!-- ./row -->
+  </div><!-- ./container -->
+</section><!-- #/wraper_for_socials -->
+		
 <!-- FOOTER -->
 
 <section id="foot_of_page">

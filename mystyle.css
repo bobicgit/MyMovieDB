@@ -7,29 +7,36 @@ html, body{
 	padding:0;
 	color:lightgrey;
 	background-color: #333;
-	
 	font-family: 'Lato', sans-serif;
 	font-size:20px;
 }
-
-body{padding-top:50px;}
-
+body{
+	padding-top:50px;
+}
 h2{
 	text-align: center;
 }
 
-#container{
-	width: 100%;
+/*NAVBAR*/
+
+.navbar{
+	padding-top: 10px;
+	padding-bottom: 10px;
+	background-color: #D70A0A;
 }
+#nav a{
+	color: #fff;
+}
+#nav a:hover{
+	color: #ff9090;
+}
+
+/*LOGO*/
 
 #header{
 	margin-top:30px;
-	width:100%;
 	padding: 40px 0;
 }
- 
-/*LOGO*/
-
 #logo{
 	width:450px;
 	font-size:48px;
@@ -42,28 +49,12 @@ h2{
 #logo h1{
 	font-size: 50px;
 	margin-top:40px;
-	
 }
 #logo img {
 	margin-right: 35px;
 }
 
-/*NAWIGACJA*/
-
-.navbar{
-	padding-top: 10px;
-	padding-bottom: 10px;
-	background-color: #D70A0A;
-}
-
-#nav a{
-	color: #fff;
-}
-#nav a:hover{
-	color: #ff9090;
-}
-
-/*ZAWARTOSC STRONY*/
+/*CONTENT*/
 
 #content {
 	margin-top: 40px;
@@ -72,31 +63,23 @@ h2{
 	font-size:16px;
 	width: 100%;
 }
-
 #content h2 {
 	
 	font-size:25px;
 	text-align: center;
 	margin-bottom: 40px;
 }
-
-
 .form-group{
 	width: 100%;
 }
-
 #jRate {
 	padding:5px;
 	width:auto;
 	margin-left: 8px;
-	/*margin-bottom: 5px;*/
+
 }
-
-
 label.error{
 	color:#ff9090;
-
-
 }
 select {
 	width: 240px;
@@ -105,7 +88,6 @@ select {
 	cursor:pointer;
 	color:grey;
 }
-
 input[type="checkbox"]{
 	width:15px;
 	height: 15px;
@@ -113,11 +95,9 @@ input[type="checkbox"]{
 	margin:0px 4px 0 0;
 	background: green;
 }
-
 #actors {
 	width:40%;
 }
-
 #subbut {
 	background-color:#D70A0A;
 	color:#fff;
@@ -129,12 +109,11 @@ input[type="checkbox"]{
 	font-size: 24px;
 	text-align: center;
 }
-
 #subbut:hover{
 	color:#ff9090;
 }
 
-/*PODSTRONA ALL_MOVIES*/
+/*ALL_MOVIES SUBLINK*/
 
 #all_movies{
 	margin-right: auto;
@@ -144,20 +123,17 @@ input[type="checkbox"]{
 	line-height: 1.5em;
 	width:40%;
 }
-
 #all_movies a{
 	text-decoration: none;
 	color: lightgrey;
 	font-size: 19px;
 }
-
 #all_movies a:hover{
-	
 	color: #ff9090;
 	font-size: 19px;
 }
 
-/*PODSTRONA MOVIE_DETAILS*/
+/*MOVIE_DETAILS SUBLINK*/
 
 #specific_movie{
 	width: 40%;
@@ -166,27 +142,20 @@ input[type="checkbox"]{
 	margin-right: auto;
 	margin-left: auto;	
 	line-height: 2em;
-
 }
-
 #title_generated{
-	font-size: 40px;
-	
+	font-size: 40px;	
 }
-
 #sizing_title{
 	font-size: 40px;
 	margin-top: 10px;
 	padding:5px;
 }
-
 .writecolor{
 	color: #ff9090;
 	font-size: 22px;
 }
-
 a button {
-
 	background-color:#D70A0A;
 	color:#fff;
 	width:190px;
@@ -197,17 +166,14 @@ a button {
 	font-size: 20px;
 	text-align: center;
 }
-
 a button:hover{
 	color:#ff9090;
 } 
-
 table  {
 	margin-left: auto;
 	margin-right: auto;
 	border: 2px solid lightgrey;
 }
-
 th, td, th {
 	border: 1px solid lightgrey;
 	min-width: 50px;
@@ -215,7 +181,8 @@ th, td, th {
 	padding: 5px;
 	text-align: center;
 }
-/*PODSTRONA CONTACT*/
+
+/*CONTACT SUBLINK*/
 
 #contact {
 	width: 50%;
@@ -226,66 +193,41 @@ th, td, th {
 	line-height: 1.5em;
 }
 
-/*LINKI SPOLECZNOSCIOWE*/
+/*SOCIAL LINKS*/
 
-#socials {
-	margin-top:40px;
-	width: 100%;
-	text-align: center;
+#wraper_for_socials{
 	background-color: #292929;
+	text-align: center;
+	margin-top: 120px;
 }
-
-#socialdivs{
-	width:1000px;
-	margin-right: auto;
+#wraper_for_socials>.container>.row>.col-md-3,.col-sm-12,.col-xs-12{
+		text-align: center;
+}
+#wraper_for_socials>.container>.row{
 	margin-left: auto;
-	height: 155px;
+	margin-right: auto;
 }
-
-.fb{
-	width: 250px;
-	height: 155px;
-	float:left;
+.fb, .fw, .imdb, .kmf{
+	margin: 0 auto	;
+	text-align: center;
 }
-
 .fb:hover{
 	background-color: #4668b3;
 }
-.fw{
-	width: 250px;
-	height: 155px;
-	float:left;
-}
-
 .fw:hover{
 	background-color: #FFC404;
 }
-.imdb{
-	width: 250px;
-	height: 155px;
-	float:left;
-}
-
 .imdb:hover{
 	background-color: #f5de50;
 }
-.kmf{
-	width: 250px;
-	height: 155px;
-	float:left;
-}
-
 .kmf:hover{
 	background-color: #7F3E98;
 }
-
 a.sociallink{
 	color:white;
 	text-decoration: none;
 	display:block;
-	width: 250px;
 	height: 155px;
-
 }
 
 /*FOOTER*/
@@ -293,6 +235,4 @@ a.sociallink{
 #footer {
 	text-align: center;
 	padding:30px;
-	/*height:150px;*/
-	/*margin-bottom: -20px;*/
 }
