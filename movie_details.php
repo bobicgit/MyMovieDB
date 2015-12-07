@@ -7,7 +7,7 @@
   <title>Movie Database</title>
   
   <meta name="description" content="My selected movies, from around the World!" />
-  <meta name="keywords" content="movies, actors, database, top movies" />
+  <meta name="keywords" content="movies, actors, rowbase, top movies" />
 
   <link href="bootstrap.min.css" rel="stylesheet" media="screen">
   <link href="mystyle.css" rel="stylesheet" type="text/css" >
@@ -26,38 +26,56 @@
 </head>
 
 <body>
-  <div id="container">
 
-    <!-- Navigation -->
-    <div  id="nav" class="navbar navbar-default navbar-fixed-top">
+<!-- MENU AND NAVBAR -->  
+
+<section id="menu">
+  <nav  id="nav" class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
       <div class="navbar-header">
         <a class="navbar-brand" href="index.php" style="font-weight:bold; font-size: 30px;" >MoviesDB</a>
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>    
+      </div><!-- navbar-header -->
+      <div class="navbar-collapse collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav" >
+          <li ><a href="index.php">Home</a></li>
+          <li><a href="all_movies.php">Movies</a></li>
+          <li><a href="top_10.php">Top 10</a></li>
+          <li><a href="contact.php">Contact</a></li>
+        </ul>
+      </div><!-- ./navbar-collapse --> 
+    </div><!-- ./container -->
+  </nav><!-- ./navbar-default -->
+</section><!-- #/menu -->
 
-        </div>
-        <div class="navbar-collapse collapse">
-            <ul class="nav navbar-nav" >
-              <li ><a href="index.php">Home</a></li>
-              <li><a href="all_movies.php">Movies</a></li>
-              <li><a href="top_10.php">Top 10</a></li>
-              <li><a href="contact.php">Contact</a></li>
-            </ul>
+<!-- LOGO -->
 
-        </div>
-    </div>
-    <!-- Header -->
-
+<section id="movie_logo">
+  <div class="container">
     <div id="header">
       <div id="logo">
         <img src="logoiconmin.png" style="float:left"/>
         <h1>Movies<span style="color: #e72f2f">DB</span></h1>
-        <div style="clear:both">
-      </div>
-    </div>
-    <!-- Main -->
+          <div style="clear:both"></div>
+      </div><!-- #/logo -->
+    </div><!-- #/header -->
+  </div><!-- ./container -->
+</section><!-- #/movie_logo -->
+
+<!-- CONTENT OF SPECIFIC MOVIE -->
+
+<section id="specific_movie_detail">
+  <div class="container">
     <div id="content">
-      <!-- <h2>List of all movies from database: </h2> -->
       <div id="specific_movie">
-        <!-- Zaczynam polaczenie z baza danych, aby pobrac linki -->
+
+<!-- START CONNECTION TO DB TO GET THE INFO ABOUT SPECIFIC MOVIE -->
+
 <?php
 
   require_once "conect.php";
@@ -65,83 +83,75 @@
   $connection = @new mysqli($host,$db_user,$db_pass,$db_name);
 
   if($connection ->connect_errno!=0){
-
     echo "Error: ".$connection->connect_errno."Opis: ".$connection->connect_error;
-    // to echo wykona sie tylko wtedy gdy polaczenia nie uda sie ustanowic.
-    // wyswietli numer bledu
   }else{
 
-    $id_movie = $_GET['id']; // pobiera id z linku ktory tworzy sie w petli while w pliku all_movies
-// *****
-    $sql = "SELECT * FROM movies WHERE id_movie=$id_movie";
-    
+// GET THE ID FROM LINK THAT WAS CREATED IN WHILE LOOP IN all_movies FILE
+
+    $id_movie = $_GET['id'];
+    $sql = "SELECT * FROM movies WHERE id=$id_movie";
       if($result = @$connection ->query($sql)){
+        while($row = mysqli_fetch_array($result)){
+          $title = $row['title'];
+          $year = $row['year'];
+          $description = $row['description'];
+          $rating = $row['rating'];
+          $genre_id = $row['genre_id'];
 
-        while($data = mysqli_fetch_array($result)){
-
-          
-          $title = $data['title'];
-          $year = $data['year'];
-          $description = $data['description'];
-          $rating = $data['rating'];
-          $id_genres = $data['id_genres'];
-
-// ******** drukuje dane podstawowe i pobieram id_genres, aby wyciagnac to info z innej tabeli
+// PRINT A TITLE, DESCRIPTION, YEAR OF MOVIE AND GETTING A genre_id TO GET INFO FROM ANOTHER TABLE
 
           echo ('<div id="title_generated" style="color:#ff9090;">Title: </div> <div id="sizing_title">'.$title.'</div> <br>');
           echo ('<div class = "writecolor">Description: </div>'.$description);
           echo ('<div class = "writecolor">Release Year: </div>'.$year."<br>");
 
+// NEW QUERY TO genre TABLE. GETTING genre.
 
-          //  "<br> Description: ".$description."<br>".$year."<br>".$rating."<br>");
+    $sql = "SELECT * from genres WHERE id=$genre_id";
 
-// ******** nowe zapytanie do innej tabeli, po gatunek.
-
-    $sql_2 = "SELECT * from genres WHERE idgenres=$id_genres";
-
-      if($result = @$connection -> query($sql_2)){
-        while($data_2 = mysqli_fetch_array($result)){
-          $genre = $data_2['genre'];
+      if($result = @$connection -> query($sql)){
+        while($row = mysqli_fetch_array($result)){
+          $genre = $row['genre'];
           echo ('<div class = "writecolor">Genre: </div>'.$genre."<br>"); // drukuje gatunek
         }
       }else{
          echo "ERROR: Could not able to execute $sql. " . mysqli_error($connection);
       }
 
-// ******** Wyciaganie id actorow z tabeli actors_movies, grajacych w danym filmie!  
+// QUERY T GET ACTOS ID'S THAT ARE PLAYING IN SPECIFIC MOVIE
 
-    $sql_3 = "SELECT actor_id FROM actors_movies WHERE movie_id=$id_movie";
+    $sql = "SELECT actor_id FROM actors_movies WHERE movie_id=$id_movie";
 
-      if($result = @$connection -> query($sql_3)){
-        // tworze tablice do ktorej bede przekazywal wartosci id poszczegolnych aktorow do zapytan
-        // pozniej zostanie ona wykorzystana do petli aby wyswietlic info o aktorach.
+      if($result = @$connection -> query($sql)){
+
+// CREATE A TABLE IN WHICH WILL BE HOLD THE ID'S.
+
         $array_of_actors_id = array();
-          while($data_3 = mysqli_fetch_array($result)){
-            $actor_id = $data_3['actor_id'];
-            //echo ($actor_id. "<br> "); // drukuje idiki aktorow
+          while($row = mysqli_fetch_array($result)){
+            $actor_id = $row['actor_id'];
             array_push($array_of_actors_id, "$actor_id");
           }
       }else{
           echo "ERROR: Could not able to execute $sql. " . mysqli_error($connection);
         }
 
-// ******** Wyciaganie imienia i nazwiska aktorow grajacych w filmie o danym id z odpowiedniej tabeli! 
-// w petli foreach dla kazdego aktora po kolei jest tworzone zapytanie wycigajace info z bazy. 
+// GETTING A NAME AND SURNAME OF ACTORS PLAYING IN SPEIFIC MOVIE. IN foreach LOOP THERE IS CREATED
+// QUERY FOR EACH ACTORS. HOW MANY ACTORS THAT MANY QUERIES.
+ 
     echo ('<div class = "writecolor">Actors: </div>'); 
       if(empty($array_of_actors_id)){
         echo ('Sorry! No actors have been chosen :(');
       }    
       foreach ($array_of_actors_id as $actor_id) {
                 
-        $sql_4 = "SELECT name, surname FROM actors WHERE idactors=$actor_id";
+        $sql = "SELECT name, surname FROM actors WHERE id=$actor_id";
             
-        if($result = @$connection -> query($sql_4)){
+        if($result = @$connection -> query($sql)){
             
-          $data_4 = mysqli_fetch_array($result);
+          $row = mysqli_fetch_array($result);
                 
-          $name = $data_4['name'];
-          $surname = $data_4['surname'];
-          echo ($name." ".$surname."<br>");   
+          $name = $row['name'];
+          $surname = $row['surname'];
+          echo ($name." ".$surname."<br>");    
         }else{
           echo "ERROR: Could not able to execute $sql. " . mysqli_error($connection);
         }
@@ -151,6 +161,9 @@
     }else{
         echo "ERROR: Could not able to execute $sql. " . mysqli_error($connection);
   }
+
+// CREATEING A TWO LINKS WITH OPTION TO EDIT A MOVIE OR DELETE A MOVIE. 
+  
         echo ('<a href="movie_update.php?id=' . $id_movie . '" ><button type="button"> Edit: <br>'. $title .'</button></a>');
         echo ('<a href="movie_delete.php?id=' . $id_movie . '" class = "confirmation" ><button type="button"> Delete: <br>'. $title .'</button></a><br>');
   }
@@ -159,22 +172,46 @@
 ?>  
       </div>
     </div>
-
-    <div id="socials">
-      <div id="socialdivs"> <!-- jednakowe wymiary dla socialdivs i divach w srodku -->
-        <div class="fb"><a href="http://www.facebook.com" target="_blank" title="Facebook" class="sociallink"><i class="icon-facebook-circled"></i></a></div>
-        <div class="fw"><a href="http://www.filmweb.pl" target="_blank" title="Filmweb" class="sociallink"><i class="icon-videocam"></i></a></div>
-        <div class="imdb"><a href="http://www.imdb.com" target="_blank" title="IMDB" class="sociallink"><i class="icon-video"></i></a></div>
-        <div class="kmf"><a href="http://www.kmf.org.pl" target="_blank" title="KMF" class="sociallink"><i class="icon-video-1"></i></a></div>
-        <div styl="clear:both"></div>
-      </div>
-    </div>
-    <!-- Footer -->
-    <div id="footer">
-      Maciej Mańko &copy; 2015r. &nbsp;&nbsp;&nbsp;&nbsp;"I have come here to chew bubblegum and kick ass... and I'm all out of bubblegum.” - Nada, They Live (1988)
-    </div>
   </div>
+</section>
+
+<!-- SOCIAL LINKS -->
+
+<section id= "wraper_for_socials">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-3 col-sm-12 col-xs-12">        
+        <div class="fb"><a href="http://www.facebook.com" target="_blank" title="Facebook" class="sociallink"><i class="icon-facebook-circled"></i></a></div>
+      </div>
+      <div class="col-md-3 col-sm-12 col-xs-12">        
+        <div class="fw"><a href="http://www.filmweb.pl" target="_blank" title="Filmweb" class="sociallink"><i class="icon-videocam"></i></a></div>
+      </div>
+      <div class="col-md-3 col-sm-12 col-xs-12">        
+        <div class="imdb"><a href="http://www.imdb.com" target="_blank" title="IMDB" class="sociallink"><i class="icon-video"></i></a></div>
+      </div>
+      <div class="col-md-3 col-sm-12 col-xs-12">        
+        <div class="kmf"><a href="http://www.kmf.org.pl" target="_blank" title="KMF" class="sociallink"><i class="icon-video-1"></i></a></div>
+      </div>
+      <div styl="clear:both"></div>
+    </div> <!-- ./row -->
+  </div><!-- ./container -->
+</section><!-- #/wraper_for_socials -->
+    
+<!-- FOOTER -->
+
+<section id="foot_of_page">
+  <div class="container">
+    <div id="footer">
+      Maciej Mańko &copy; 2015r.</br>"I have come here to chew bubblegum and kick ass...
+      and I'm all out of bubblegum.” - Nada, They Live (1988)
+    </div><!-- #/footer -->   
+  </div><!-- ./container -->
+</section><!-- #/foot_of_page -->
+
+<!-- SCRIPTS -->
+
 <script type="text/javascript" src="rating.js"></script>
+<script type="text/javascript" src="bootstrap.min.js"></script>
 
 </body>
 </html>
