@@ -67,91 +67,86 @@
   </div><!-- ./container -->
 </section><!-- #/movie_logo -->
 
-<!-- Main -->
-		<div id="content">
-			<h2>Add your favorite movies to my database!</h2>
-			<form class="form-horizontal" id="add_movie" action="/">
-  				<div class="form-group">
-    				<label for="title" class="col-sm-4 control-label">Title</label>
-   						<div class="col-sm-4">
-      						<input type="text" class="form-control" name="title" placeholder="Title">
-    					</div>
-  				</div>
+<!-- FORM -->
 
-  				<div class="form-group">
-    				<label for="despription" class="col-sm-4 control-label">Description</label>
-    					<div  class="col-sm-4">
-                <input type="hidden" class="form-control" name="summernote_holder" id="summernote_plain" >
-      						<textarea id = "summernote_field" class="form-control" rows="4"></textarea>
-                  
-    					</div>
-  				</div>
-
-  				<div class="form-group">
-    				<label for="year" class="col-sm-4 control-label">Year</label>
-    					<div class="col-sm-4">
-      						<input type="text" class="form-control" name="year" placeholder="Year">
-    					</div>
-  				</div>
-
-				<!-- rating SELECT BOX podpinasz plugin pod siatke bootstrapa z class col-sm-->
-
-  				 <div id="forselect" class="form-group" >
-  					<label for="selection" class="col-sm-4 control-label">Genre</label>
-  						<div class=" col-sm-3">
-                <select id="selection" name="selection_to_send">
-      
-                </select>
-  						</div>
-  				</div>
-
-  				<!-- rating RATING PLUGIN podpinasz plugin pod siatke bootstrapa z class col-sm-->
-  				<div  class="form-group" id="for_rating">
-  					<label for="jRate" class="col-sm-4 control-label">Rating</label>
-  					<div class=" col-sm-1" id="jRate">
-  						<!-- tutaj siedza wszystkie gwiazki z jRate plugin -->
-              <div  >
-                  <!-- <div class="form-group" id="container_for_error"></div> -->
-                  <input type="hidden" class="form-control" name="rate" id="actual_rate">
+<section id="main_form">
+  <div class="container">
+    <div id="content">
+      <h2>Add your favorite movies to my database!</h2>
+      <form class="form-horizontal" id="add_movie" action="/">
+        <div class="form-group">
+          <label for="title" class="col-sm-3 control-label">Title</label>
+            <div class="col-sm-12 col-md-6">
+                <input type="text" class="form-control" name="title" placeholder="Title">
             </div>
-  					</div>
-            
-  				</div>
+        </div>
+        <div class="form-group">
+          <label for="despription" class="col-sm-3 control-label">Description</label>
+            <div  class="col-sm-12 col-md-6">
+              <input type="hidden" class="form-control" name="summernote_holder" id="summernote_plain" >
+                <textarea id = "summernote_field" class="form-control" rows="4"></textarea>
+            </div>
+        </div>
+        <div class="form-group">
+          <label for="year" class="col-sm-3 control-label">Year</label>
+            <div class="col-sm-12 col-md-6">
+              <input type="text" class="form-control" name="year" placeholder="Year">
+            </div>
+        </div>
+        <div id="forselect" class="form-group" >
+          <label for="selection" class="col-sm-3 control-label">Genre</label>
+            <div class=" col-sm-12 col-md-6">
+              <select id="selection" name="selection_to_send"></select>
+            </div>
+          </div>
 
+<!-- jRATE plugin, for nice looking stars for rating-->
 
+        <div  class="form-group" id="for_rating">
+          <label for="jRate" class="col-sm-3 control-label">Rating</label>
+            <div class=" col-sm-12 col-md-6" id="jRate">
+              <!-- here are stored all stars from jRate plugin -->
+              <div>
+                <input type="hidden" class="form-control" name="rate" id="actual_rate">
+              </div>
+            </div>
+        </div>
 
-          <!-- Multi wybór aktorów z bazy danych -->
-  				<div id="formultiselect" class="form-group" >
-  					<label for="selection" class="col-sm-4 control-label">Actors</label>
-  						<div class=" col-sm-3" id="actors">
-  						</div>
-  				</div>
-  				<div class="form-group">
-    				<div class="col-sm-offset-5 col-sm-2">
-      					<button type="submit" class="btn btn-default" id="subbut">Add a movie!</button>
-    				</div>
- 				</div>
-			</form>
-		</div>
+<!-- Multiselect checkboxes with actors from database -->
+
+        <div id="formultiselect" class="form-group" >
+          <label for="selection" class="col-sm-3 control-label">Actors</label>
+            <div class=" col-sm-12 col-md-6" id="actors"></div>
+        </div>
+        <div class="form-group">
+          <div class="center-block">
+            <button type="submit" class="btn btn-default" id="subbut">Add a movie!</button>
+          </div>
+        </div>
+      </form>
+    </div>   
+  </div>
+</section>
+		
 
 <!-- SOCIAL LINKS -->
 
 <section id= "wraper_for_socials">
   <div class="container">
     <div class="row">
-      <div class="col-md-3 col-sm-12 col-xs-12 center-block">        
+      <div class="col-md-3 col-sm-12 col-xs-12">        
         <div class="fb"><a href="http://www.facebook.com" target="_blank" title="Facebook" class="sociallink"><i class="icon-facebook-circled"></i></a></div>
-</div>
-      <div class="col-md-3 col-sm-12 col-xs-12 center-block">        
+      </div>
+      <div class="col-md-3 col-sm-12 col-xs-12">        
         <div class="fw"><a href="http://www.filmweb.pl" target="_blank" title="Filmweb" class="sociallink"><i class="icon-videocam"></i></a></div>
-</div>
-      <div class="col-md-3 col-sm-12 col-xs-12 center-block">        
+      </div>
+      <div class="col-md-3 col-sm-12 col-xs-12">        
         <div class="imdb"><a href="http://www.imdb.com" target="_blank" title="IMDB" class="sociallink"><i class="icon-video"></i></a></div>
-</div>
-      <div class="col-md-3 col-sm-12 col-xs-12 center-block">        
+      </div>
+      <div class="col-md-3 col-sm-12 col-xs-12">        
         <div class="kmf"><a href="http://www.kmf.org.pl" target="_blank" title="KMF" class="sociallink"><i class="icon-video-1"></i></a></div>
-</div>
-<div styl="clear:both"></div>
+      </div>
+      <div styl="clear:both"></div>
     </div> <!-- ./row -->
   </div><!-- ./container -->
 </section><!-- #/wraper_for_socials -->
