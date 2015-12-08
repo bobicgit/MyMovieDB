@@ -53,6 +53,20 @@ h2{
 #logo img {
 	margin-right: 35px;
 }
+@media (max-width: 768px){
+	#logo{
+		width:155px;
+		font-size:48px;
+		border:1px solid white;
+		margin-left: auto;
+		margin-right: auto;
+		height:138px;
+		margin-top:40px;
+	}
+	#logo img {
+	margin-right: 0px;
+	}
+}
 
 /*CONTENT*/
 
@@ -75,7 +89,6 @@ label.error{
 	color:#ff9090;
 }
 select {
-	width: 340px;
 	height: 35px;
 	margin-top: 8px;
 	cursor:pointer;
@@ -87,9 +100,6 @@ input[type="checkbox"]{
 	cursor:pointer;
 	margin:0px 4px 0 0;
 	background: green;
-}
-#actors {
-	width:40%;
 }
 #subbut {
 	display:block;
@@ -129,7 +139,6 @@ input[type="checkbox"]{
 	text-align: center;
 	font-size: 18px;
 	line-height: 1.5em;
-	width:40%;
 }
 #all_movies a{
 	text-decoration: none;
@@ -144,7 +153,6 @@ input[type="checkbox"]{
 /*MOVIE_DETAILS SUBLINK*/
 
 #specific_movie{
-	width: 40%;
 	text-align: center;
 	font-size: 18px;
 	margin-right: auto;
@@ -193,7 +201,7 @@ th, td, th {
 /*CONTACT SUBLINK*/
 
 #contact {
-	width: 50%;
+	
 	text-align: center;
 	font-size: 18px;
 	margin-right: auto;

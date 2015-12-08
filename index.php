@@ -60,7 +60,7 @@
     <div id="header">
     	<div id="logo">
     		<img src="logoiconmin.png" style="float:left"/>
-    		<h1>Movies<span style="color: #e72f2f">DB</span></h1>
+    		<h1 class="hidden-xs">Movies<span style="color: #e72f2f">DB</span></h1>
     		  <div style="clear:both"></div>
       </div><!-- #/logo -->
     </div><!-- #/header -->

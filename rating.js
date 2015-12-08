@@ -1,21 +1,21 @@
-// Funkcja wypelniajaca pole select nazwami gatunkow z bazy danych oraz wykonujaca checkboxy
-// z imieniem oraz nazwiskiem aktora, rowniez z bazy danych. 
+// FUNCTION THAT FILLS SELECTBOX WITH NAMES OF GENRES FROM DATABASE AND CREATING
+// A CHECKBOXES WITH NAME AND SURNAME OF ACTORS, ALSO FROM DATABASE.
+// I IS MADE BY AJAX, DYNAMICLLY.
+ 
 function filling(){
 	$('#selection').empty();
 	$('#selection').append("<option value = ''>Loading ...</option>");
 
-
 	$.ajax({
 		type: 'POST',
 		url: 'selgen.php',
-		//contentType: 'text/html; charset=utf-8',
 		dataType:'json',
 		success: function(data) {
 			console.log(data);
 			$('#selection').empty();
 			$('#selection').append('<option value = "">--Select Genre--</option>');
 			$.each(data,function(i, item) {
-				$('#selection').append('<option value ="' + data[i].idgenres + '" >' + data[i].genre +
+				$('#selection').append('<option value ="' + data[i].id + '" >' + data[i].genre +
 				 '</option>');
 			});
 		},
@@ -27,13 +27,12 @@ function filling(){
 	$.ajax({
 		type: 'POST',
 		url: 'selact.php',
-		//contentType: 'text/html; charset=utf-8',
 		dataType:'json',
 		success: function(data) {
 			console.log(data);
 			$.each(data,function(i, item) {
-				$('#actors').append('<input type = "checkbox" id="' + 'cb' + data[i].idactors + 
-				'" value = "'+data[i].idactors+'" name = "check_list[]">' + " " + data[i].name + " "
+				$('#actors').append('<input type = "checkbox" id="' + 'cb' + data[i].id + 
+				'" value = "'+data[i].id+'" name = "check_list[]">' + " " + data[i].name + " "
 				 + data[i].surname + '<br>');
 			});
 		},
@@ -41,12 +40,11 @@ function filling(){
  		 	console.log(textStatus, errorThrown);
 		}	
 	});
-
 }
 
-//Funkcja służąca do walidacji formularza
-$(function myval(){
+// FUNCTION OF VALIDATION OF THE FORM USING jQUERY VALIDATIN PLUGIN
 
+$(function myval(){
 	$('#add_movie').validate({
 		ignore: "input[type='text']:hidden",
 		rules: {
@@ -83,7 +81,6 @@ $(function myval(){
     			error.insertBefore(element);
   			}
 		}
-
 	});
 });
 
@@ -91,8 +88,6 @@ $(function myval(){
 $(document).ready(function(){
 
 	filling();
-	//show_all_movies();
-
 
 	$('#jRate').jRate({
 		count: 10,
@@ -107,19 +102,17 @@ $(document).ready(function(){
 	}),
 
 	$('#summernote_field').summernote({
-
-		height: 150,// nie wykonuje sie nic z onChnange, a wczesniej robilo
+		height: 150,
 		onChange: function(contents, $editable) {
 		 cleanText = $('#summernote_field').code();
     	$('#summernote_plain').val(cleanText);
     	console.log(cleanText);
-  		},
-
-  		onpaste: function(content) {
-            setTimeout(function () {
-                editor.code(content.target.textContent);
-            }, 10);
-        }
+  	},
+  	onpaste: function(content) {
+      setTimeout(function () {
+         editor.code(content.target.textContent);
+      }, 10);
+    }
 	}),
 
 
@@ -144,12 +137,10 @@ $(document).ready(function(){
 				}
 			});
 		}else{
-
 		}
 	}),
 
 	$('.confirmation').on('click', function(){
 		return confirm('Are you sure?');
 	});
-	
-   });
+});

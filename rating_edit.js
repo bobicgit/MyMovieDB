@@ -1,5 +1,6 @@
-// Funkcja wypelniajaca pole select nazwami gatunkow z bazy danych oraz wykonujaca checkboxy
-// z imieniem oraz nazwiskiem aktora, rowniez z bazy danych. 
+// FUNCTION THAT FILLS SELECTBOX WITH NAMES OF GENRES FROM DATABASE AND CREATING
+// A CHECKBOXES WITH NAME AND SURNAME OF ACTORS, ALSO FROM DATABASE.
+// I IS MADE BY AJAX, DYNAMICLLY.
 
 function filling(){
 	$('#selection').empty();
@@ -8,37 +9,37 @@ function filling(){
 	$.ajax({
 		type: 'POST',
 		url: 'selgen.php',
-		//contentType: 'text/html; charset=utf-8',
 		dataType:'json',
 		success: function(data) {
 			console.log(data);
 
+// VARIABLE genre_edit_id IS DECLARD IN movie_update.php FILE IN SEPERATED JS SCRIPT.
+// IT DESCRIBES THE ID OF THE GENRE OF EDITING MOVIE
+
 			$('#selection').empty();
 			$('#selection').append('<option value = "">--Select Genre--</option>');
-// zmienna genre_edit_id jest deklarowana w pliku movie_update.php w osobnym skrypcie js
-// jest to zmienna z id gatunku edytowanego filmu.
 			$.each(data,function(i, item) {
-// -1 ze wzgledu na numeracje iteracji petli each (od 0) a rekordy id w bazie od 1.
+
+// -1 BECOUSE OF ITERATION IN EACH LOOP
+
 				if (i==genre_edit_id-1){
 					$('#selection').append('<option value ="' + (genre_edit_id) + '" selected="selected" >' + data[genre_edit_id-1].genre +
 				 	'</option>');
 				}else{
-					$('#selection').append('<option value ="' + data[i].idgenres + '" >' + data[i].genre +
+					$('#selection').append('<option value ="' + data[i].id + '" >' + data[i].genre +
 				 	'</option>');
 				}
-
 			});
-
 		},
 		error: function(jqXHR, textStatus, errorThrown) {
  		 	console.log(textStatus, errorThrown);
 		}	
 	});
 
-// pobieram zmienna z php string_of_actors_id_edit i sprawdzam, czy jest pustym lancuchem, czy nie. Jesli tak
-// tworze pusta tablice, ktora bede wykorzystywac w petli podczas wyswietlania odpowiednich checkboxow (w
-//	tym przypadku aby zadne nie byly zaznaczone). Jesli nie jest to pusty lancuch, to zamieniam go na
-// tablice z wartosciami, ktora tez bedzie wykorzystana podczas wysweitlania zaznaczonych chackboxow.
+// GETTING THE VARIABLE string_of_actors_id_edit FROM movie_update.php AND CHECKING IF IT IS AN EMPT STRING
+// IF IT IS AN EMPTY ARRAY IS CREATING, NO ACTORS WAS CHOSEN. IF THE STRING IS NOT EMPTY, THEN IT IS 
+// TRANSFORMED TO ARRAY WITH THOSE VALUES. ARRAY WILL BE USE IN DISPLAYING CHOECKBOXES.
+
 	if (string_of_actors_id_edit === '') {
 		var array_of_actors_id_edit2 = [];
 
@@ -47,30 +48,31 @@ function filling(){
 		var array_of_actors_id_edit2 = array_of_actors_id_edit.reverse();
 		console.log(array_of_actors_id_edit2);
 	}
-//	WYSWIETLANIE CHECKBOXOW AKTOROW Z ZAZNACZONYMI WCZESNIEJ CHECKBOXAMI. 
+
+// DISPLAYING A CHECKBOXES WITH ACTORS THAT WAS CHOSEN BEFORE
 
 	$.ajax({
 		type: 'POST',
 		url: 'selact.php',
-		//contentType: 'text/html; charset=utf-8',
 		dataType:'json',
 		success: function(data) {
 			console.log(data);
-			
-				console.log(data.length);
-				var j = 0;
-				var i = 0;
+			console.log(data.length);
+			var j = 0;
+			var i = 0;
 				for(i ; i<data.length ; i++){
 
-							$('#actors').append('<input type = "checkbox" id="' + 'cb' + data[i].idactors + 
-							'" value = "'+data[i].idactors+'" name = "new_check_list[]"  >' + " " + data[i].name + " "
-							+ data[i].surname + '<br>');
-// po dodaniu wszystkich checkboxow, sprawdzam, ktore idaktorow sa takie same jak w tablicy pobranej z php
-// jesli sa, to zmieniam atrybut inputa, aby wyswietlal sie zaznaczony.
+					$('#actors').append('<input type = "checkbox" id="' + 'cb' + data[i].id + 
+					'" value = "'+data[i].id+'" name = "new_check_list[]"  >' + " " + data[i].name + " "
+					+ data[i].surname + '<br>');
+
+// AFTER DISPLAYING ALL OF CHECKBOXES, THERE IS ANOTHER for LOOP FOR CHECKING WHICH OF IDS OF ACTORS ARE THE 
+// SAME AS IN CREATED ARRAY. WHEN IT IS THE SAME I AM CHANGING AN ARTIBUTE OF INPUT FOR CHECKED, TO DISPLAY 
+// IT PROPERLY
+
 					for(j=0 ; j<array_of_actors_id_edit2.length ; j++){
-						if (data[i].idactors == array_of_actors_id_edit2[j]){
-							
-							$('#cb'+data[i].idactors+'').attr('checked', true);
+						if (data[i].id == array_of_actors_id_edit2[j]){
+							$('#cb'+data[i].id+'').attr('checked', true);
 						}
 					}
 				}
@@ -79,10 +81,10 @@ function filling(){
  		 	console.log(textStatus, errorThrown);
 		}	
 	});
-
 }
 
-//Funkcja służąca do walidacji formularza
+// FUNCTION OF VALIDATION OF THE FORM USING jQUERY VALIDATIN PLUGIN
+
 $(function myval(){
 
 	$('#add_movie').validate({
@@ -121,7 +123,6 @@ $(function myval(){
     			error.insertBefore(element);
   			}
 		}
-
 	});
 });
 
@@ -151,22 +152,22 @@ $(document).ready(function(){
 		$('#summernote_field').code(description_edit);
     	$('#summernote_plain').val(description_edit);
     	//console.log(description_edit);
-  		},
+  	},
 		onChange: function(contents, $editable) {
 		cleanText = $('#summernote_field').code();
     	$('#summernote_plain').val(cleanText);
     	console.log(cleanText);
-  		},
+  	},
 
-  		onpaste: function(content) {
-            setTimeout(function () {
-                editor.code(content.target.textContent);
-            }, 10);
-        }
+  	onpaste: function(content) {
+      setTimeout(function () {
+        editor.code(content.target.textContent);
+      }, 10);
+    }
 	}),
 	
 		$('.confirmation').on('click', function(){
 		return confirm('Are you sure?');
 	});
 	
-   });
+});
