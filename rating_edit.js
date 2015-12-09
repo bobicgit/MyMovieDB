@@ -165,8 +165,9 @@ $(document).ready(function(){
       }, 10);
     }
 	}),
-	
-		$('.confirmation').on('click', function(){
+	$('.dropdown-toggle').dropdown(),
+
+	$('.confirmation').on('click', function(){
 		return confirm('Are you sure?');
 	});
 	

@@ -89,6 +89,7 @@ $(document).ready(function(){
 
 	filling();
 
+
 	$('#jRate').jRate({
 		count: 10,
 		startColor: "red",
@@ -114,6 +115,7 @@ $(document).ready(function(){
       }, 10);
     }
 	}),
+	$('.dropdown-toggle').dropdown(),
 
 
 	$('#add_movie').on('submit', function(par){
