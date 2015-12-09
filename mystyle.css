@@ -8,7 +8,6 @@ html, body{
 	color:lightgrey;
 	background-color: #333;
 	font-family: 'Lato', sans-serif;
-	font-size:20px;
 }
 body{
 	padding-top:50px;
@@ -26,6 +25,7 @@ h2{
 }
 #nav a{
 	color: #fff;
+	font-size: 25px;
 }
 #nav a:hover{
 	color: #ff9090;
@@ -70,11 +70,11 @@ h2{
 
 /*CONTENT*/
 
-#content {
+#main_form {
 	margin-top: 40px;
 	margin-right: auto;
 	margin-left: auto;
-	font-size:19px;
+	font-size:23px;
 }
 #content h2 {
 	text-align: center;
@@ -137,24 +137,40 @@ input[type="checkbox"]{
 	margin-right: auto;
 	margin-left: auto;
 	text-align: center;
-	font-size: 18px;
-	line-height: 1.5em;
+	line-height: 2em;
 }
 #all_movies a{
 	text-decoration: none;
 	color: lightgrey;
-	font-size: 19px;
+	font-size: 17px;
 }
 #all_movies a:hover{
 	color: #ff9090;
-	font-size: 19px;
+}
+
+/*TOP MOVIES*/
+
+#top_ten_movies{
+	margin-right: auto;
+	margin-left: auto;
+	text-align: center;
+	line-height: 1.5em;
+	font-size: 23px;
+}
+#top_ten_movies a{
+	text-decoration: none;
+	color: lightgrey;
+	font-size: 23px;
+}
+#top_ten_movies a:hover{
+	color: #ff9090;
 }
 
 /*MOVIE_DETAILS SUBLINK*/
 
 #specific_movie{
 	text-align: center;
-	font-size: 18px;
+	font-size: 19px;
 	margin-right: auto;
 	margin-left: auto;	
 	line-height: 2em;
@@ -203,7 +219,7 @@ th, td, th {
 #contact {
 	
 	text-align: center;
-	font-size: 18px;
+	font-size: 23px;
 	margin-right: auto;
 	margin-left: auto;	
 	line-height: 1.5em;
@@ -216,9 +232,6 @@ th, td, th {
 	text-align: center;
 	margin-top: 120px;
 }
-/*#wraper_for_socials>.container>.row>.col-md-3,.col-sm-12,.col-xs-12{
-	text-align: center;
-}*/
 #wraper_for_socials>.container>.row{
 	margin-left: auto;
 	margin-right: auto;
@@ -248,7 +261,8 @@ a.sociallink{
 
 /*FOOTER*/
 
-#footer {
+#foot_of_page>.container>#footer {
+	font-size:14px;
 	text-align: center;
 	padding:30px;
 }
