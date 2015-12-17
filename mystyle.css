@@ -74,7 +74,7 @@ h2{
 	margin-top: 40px;
 	margin-right: auto;
 	margin-left: auto;
-	font-size:23px;
+	font-size:20px;
 }
 #content h2 {
 	text-align: center;
@@ -142,11 +142,19 @@ input[type="checkbox"]{
 #all_movies a{
 	text-decoration: none;
 	color: lightgrey;
-	font-size: 17px;
+	font-size: 20px;
 }
 #all_movies a:hover{
 	color: #ff9090;
 }
+@media (max-width: 768px){
+	#all_movies a{
+	text-decoration: none;
+	color: lightgrey;
+	font-size: 23px;
+	}
+}
+
 
 /*TOP MOVIES*/
 
@@ -160,7 +168,7 @@ input[type="checkbox"]{
 #top_ten_movies a{
 	text-decoration: none;
 	color: lightgrey;
-	font-size: 23px;
+	font-size: 20px;
 }
 #top_ten_movies a:hover{
 	color: #ff9090;
@@ -219,7 +227,7 @@ th, td, th {
 #contact {
 	
 	text-align: center;
-	font-size: 23px;
+	font-size: 20px;
 	margin-right: auto;
 	margin-left: auto;	
 	line-height: 1.5em;
@@ -262,7 +270,7 @@ a.sociallink{
 /*FOOTER*/
 
 #foot_of_page>.container>#footer {
-	font-size:14px;
+	font-size:16px;
 	text-align: center;
 	padding:30px;
 }
